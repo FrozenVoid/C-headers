@@ -19,19 +19,19 @@ return (x << k) | (x >> (64 - k));}
 uint64_t randuint64(void) {
         static uint64_t s[4]={1,2,3,4};
 
-	const uint64_t result = xrotl(s[1] * 5, 7) * 9;
+    const uint64_t result = xrotl(s[1] * 5, 7) * 9;
 
-	const uint64_t t = s[1] << 17;
+    const uint64_t t = s[1] << 17;
 
-	s[2] ^= s[0];
-	s[3] ^= s[1];
-	s[1] ^= s[2];
-	s[0] ^= s[3];
+    s[2] ^= s[0];
+    s[3] ^= s[1];
+    s[1] ^= s[2];
+    s[0] ^= s[3];
 
-	s[2] ^= t;
+    s[2] ^= t;
 
-	s[3] = xrotl(s[3], 45);
-	return result;
+    s[3] = xrotl(s[3], 45);
+    return result;
 }
 
 uint64_t rrange(uint64_t start,uint64_t end){
@@ -45,5 +45,6 @@ double uintdouble01(uint64_t x){//range 0.0-1.0
 double randfloat(void){ return uintdouble01(randuint64());}
 
 double frange(double start, double end){
- return (uintdouble(randuint64())*(end-start))+start; }
+ return (uintdouble01(randuint64())*(end-start))+start; }
+
 
