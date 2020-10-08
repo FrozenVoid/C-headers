@@ -28,8 +28,7 @@ detuple(args)  remove parens(convert tuple to arglist) (1,2,3)-> 1,2,3
 #define id(args...) args
 #define swap(a,args...) args,a
 #define tupleof(args...) (args)
-#define detuple1(args...) args
-#define detuple(arg) detuple1 arg
+#define detuple(arg) id arg
 #define rest(a,args...) args
 #define first(a,args...) a
 #define isarg1(args...) argcountq(args) 
