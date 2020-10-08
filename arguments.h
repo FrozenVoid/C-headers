@@ -13,7 +13,7 @@ tuple(args...) add parens(convert arglist to tuple) 1,2,3 -> (1,2,3)
 detuple(args)  remove parens(convert tuple to arglist) (1,2,3)-> 1,2,3
 setapply(func,args) -> func(args) 
 remcomma(a,b) remove comma (a,b) -> a b
-
+onearg(args...) is there exactly one argument(non-empty)
 */
 
     #define argcount_count1(_0,_1,_2,_3,_4,_5,_6,_7,_8,_9,_10,_11,_12,_13,_14,\
@@ -171,3 +171,8 @@ _1019,_1020,_1021,_1022,_1023,_1024,_1025,N,...) N
 #define stringify(args...) stringify1(args) 
 #define setapply(func,args...) func(args)
 #define remcomma(a,b) a b
+#define onearg00 0
+#define onearg10 1 
+#define onearg11 0
+#define onearg01 0
+#define onearg(args...) merge(onearg,merge(isarg(first(args)),isarg(first(rest(args)))))
