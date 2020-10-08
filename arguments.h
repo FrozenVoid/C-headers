@@ -5,7 +5,7 @@ isarg(...) quick check if there an argument(first argument exists)
 first(...) return first argument
 rest(...) return arguments after first argument.(a,args..)--> args
 id(...) return argument unmodified
-swap(a,args...) return args,a(first argument last)
+swapargs(a,args...) return args,a(first argument last)
 isdefined(a) is the 'a' symbol defined (#if defined)
 stringify(args...) turn arguments into a string(1,2,3)->"1,2,3"
 merge(a,b) merges two tokens(a,b)-> ab
