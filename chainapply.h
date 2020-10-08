@@ -1030,4 +1030,4 @@ chainapply is much faster than dapply.
 #define chainapply1021(func,a,args...) func(a),chainapply1020(func,args)
 #define chainapply1022(func,a,args...) func(a),chainapply1021(func,args)
 #define chainapply1023(func,a,args...) func(a),chainapply1022(func,args)
-#define chainapply1024(func,a,args...) func(a),chainapply1023(func,args)"
+#define chainapply1024(func,a,args...) func(a),chainapply1023(func,args)
