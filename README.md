@@ -1,2 +1,2 @@
 # C-headers
-Various C headers with utility macros
+Various C headers with utility macros/functions
