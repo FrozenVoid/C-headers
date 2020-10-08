@@ -30,6 +30,7 @@ uint8_t:  "%" PRIu8,\
  int8_t:  "%" PRIi8,\
  char:   "%c",\
  char*:  "%s",\
+ void*: "%p",\
  float:  "%." stringify(FLT_DIG) "G",\
 double:  "%." stringify(DBL_DIG) "G",\
  long double: "%." stringify(LDBL_DIG) "LG" )
@@ -45,6 +46,7 @@ uint8_t:  "%" PRIx8,\
  int8_t:  "%" PRIx8,\
  char:   "%c",\
  char*:  "%s",\
+ void*: "%p",\
  float:  "%." stringify(FLT_DIG)"A",\
 double:  "%." stringify(DBL_DIG) "A",\
  long double: "%." stringify(LDBL_DIG)"LA" )
@@ -91,6 +93,7 @@ fprintf(file,delim),fprintf(file,format_type(arg),arg)
 #define dfprint(delim,file,args...) chainapply(dfprint1,appendall((delim,file),args))
 
 #define hexfdprint(delim,file,args...) chainapply(hexfdprint1,appendall((delim,file),args))
+
 
 
 
