@@ -159,7 +159,7 @@ _1019,_1020,_1021,_1022,_1023,_1024,_1025,N,...) N
 #define merge1(a,b) a##b
 #define merge(a,b) merge1(a,b)
 #define id(args...) args
-#define swap(a,args...) args,a
+#define swapargs(a,args...) args,a
 #define tupleof(args...) (args)
 #define detuple(arg) id arg
 #define rest(a,args...) args
