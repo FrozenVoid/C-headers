@@ -10,6 +10,7 @@ toatom(args...) remove all commas from arglist
 opapply(op,args...) -> arg1 op arg2 op arg3 ...
 genargs(n,arg) repeat arg N times
 tolists(args...) converts arglist to list of tuples (1,2,3)->((1),(2),(3))
+fromlist(args...) convert tuple list to arglist ((1,2),(3,4))->(1,2,3.4)
 appendall(tup,args...) ((a,b,c),1,2,3) ->((a,b,c,1),(a,b,c,2),(a,b,c,3))
 prefixall(tup,args...) ((a,b,c),1,2,3) ->((1,a,b,c),(2,a,b,c),(3,a,b,c))
 */
@@ -19,7 +20,7 @@ prefixall(tup,args...) ((a,b,c),1,2,3) ->((1,a,b,c),(2,a,b,c),(3,a,b,c))
 #define toatom(args...) dapply(remcomma,id,args)
 #define genargs(n,arg) merge(chainapply,n)(arg id,) 
 #define tolists(args...) chainapply(tuple,args)
-
+#define fromlists(args...) chainapply(detuple,args)
 
 #define appendall1(tup,arg) mergetuples(tup,(arg))
 #define prefixall1(tup,arg) mergetuples((arg),tup)
