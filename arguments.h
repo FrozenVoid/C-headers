@@ -1,5 +1,5 @@
 #pragma once
-/* argcount.h macros
+/* arguments.h macros
 argcount(...) count arguments min=0 max=1024
 isarg(...) quick check if there an argument(first argument exists)
 first(...) return first argument
