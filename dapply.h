@@ -1,6 +1,6 @@
 #pragma once
 #include "arguments.h"
-#define dapply(func2,func,args) merge(dapply,argcount(args))(func2,func,args) 
+#define dapply(func2,func,args...) merge(dapply,argcount(args))(func2,func,args) 
 #define dapply0(...) 
 #define dapply1(func2,func,x,...) func(x)
 #define dapply2(func2,func,x,args...) func2(func(x),merge(dapply,argcount(args))(func2,func,args))
