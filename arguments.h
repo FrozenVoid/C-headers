@@ -166,6 +166,7 @@ _1019,_1020,_1021,_1022,_1023,_1024,_1025,N,...) N
 #define detuple(arg) id arg
 #define rest(a,args...) args
 #define first(a,args...) a
+#define second(args...) first(rest(args))
 #define isarg1(args...) argcountq(args) 
 #define isarg(args...) isarg1(first(args))
 #define isdefined(arg) defined(arg) //gcc extension. from #if defined(x)
