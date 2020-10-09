@@ -21,6 +21,19 @@ int arr[]={1,2,3,4,5,6,7,8,9};
 int* res=formap(lambda(int,(int a),return a*a),arr);
 print("\nResult:");foreach(print,arr);print("\n");
 //Result: 1 4 9 16 25 36 49 64 81 
+-----partial application
+partial(return_type,func,part_arg_tuple,final_tuple)
+-> create function_lambda(var_args)-> return function_name(fixed_args,var_args)
+js: function partial(f, x) {
+    return function(y) { return f(x, y);}}
+note that #define already easily proxies any partial functions
+  as #define proxytox(args...) xfunc(1,2,3,args) 
+example:
+int f1(int a,int b,int c,int d){return a*b*c*d;};
+int res=partial(int,f1,(int d,int c),(2,3,c,d))(6,7);
+print("\nResult:",res);//252
+  
+
 */
 #include <stdint.h>
 #include "arguments.h"
@@ -35,3 +48,6 @@ for(size_t i=1;i<(sizeof(arr)/sizeof(accum));i++)accum=func(accum,arr[i]); accum
 i++){arr[i]=func(arr[i]);};arr;})
 #define foreach(func,arr) ({for(size_t i=0;i<(sizeof(arr)/sizeof(arr[0]));\
 i++){func(arr[i]);};arr;})
+
+
+#define partial(return_type,func,part_arg_tuple,final_tuple) ({ return_type partial_func part_arg_tuple {return func final_tuple;};partial_func;})
