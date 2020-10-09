@@ -9,4 +9,5 @@ chainapply - apply func to each argument
 print.h - variadic print macros
 arguments.h - argcount and other argument macros
 random.h - xoroshiro-based random functions
+lambda.h - create a temporary function from arguments and return it.
 ```
