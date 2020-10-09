@@ -16,6 +16,7 @@ remcomma(a,b) remove comma (a,b) -> a b
 onearg(args...) is there exactly one argument(non-empty)
 mergetuples(a,b) ((1,2,3),(4,5,6)) -> (1,2,3,4,5,6)
 toexpr(args...) execute arguments as statement expression(GCC extensions)
+toarray(name,args...) create array_name={args}
 */
 
     #define argcount_count1(_0,_1,_2,_3,_4,_5,_6,_7,_8,_9,_10,_11,_12,_13,_14,\
@@ -182,3 +183,4 @@ _1019,_1020,_1021,_1022,_1023,_1024,_1025,N,...) N
 #define onearg(args...) merge(onearg,merge(isarg(first(args)),isarg(first(rest(args)))))
 #define mergetuples(a,b) (detuple(a),detuple(b))
 #define toexpr(args...) ({args;})
+#define toarray(name,args...) typeof(first(args)) name[]={args}
