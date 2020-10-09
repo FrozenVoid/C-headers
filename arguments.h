@@ -174,6 +174,7 @@ _1019,_1020,_1021,_1022,_1023,_1024,_1025,N,...) N
 #define stringify(args...) stringify1(args) 
 #define setapply(func,args...) func(args)
 #define remcomma(a,b) a b
+#define remcomma2(a,b...) a b
 #define onearg00 0
 #define onearg10 1 
 #define onearg11 0
