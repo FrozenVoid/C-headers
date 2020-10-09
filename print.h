@@ -22,7 +22,10 @@ hexscan(args...) read hex arguments from standard input
 
 fscan(FILE*,args...) read arguments from file
 hexfscan(FILE*,args...) read hex arguments from file
-
+example:
+long double g;
+fscan(stdin,g);//&g is automatic
+print("\nscanned:",g);
 */
 #define SPACE_DELIM " "
 #define pformat(x) _Generic((x),\
