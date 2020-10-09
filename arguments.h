@@ -7,6 +7,7 @@ rest(...) return arguments after first argument.(a,args..)--> args
 id(...) return argument unmodified
 swapargs(a,args...) return args,a(first argument last)
 isdefined(a) is the 'a' symbol defined (#if defined)
+istype(x,type) is x's type=type(1) or not (0)
 stringify(args...) turn arguments into a string(1,2,3)->"1,2,3"
 merge(a,b) merges two tokens(a,b)-> ab
 tuple(args...) add parens(convert arglist to tuple) 1,2,3 -> (1,2,3)
@@ -49,3 +50,4 @@ toarray(name,args...) create array_name={args}
 #define mergetuples(a,b) (detuple(a),detuple(b))
 #define toexpr(args...) ({args;})
 #define toarray(name,args...) typeof(first(args)) name[]={args}
+#define istype(x,type) (_Generic((x),type:1,default:0))
