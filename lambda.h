@@ -16,10 +16,11 @@ int res=reduce(lambda(int,(int acc,int b),return acc+b),arr);
 print("\nResult:",res,"\n");// 45
 
 */
+#include <stdint.h>
 #include "arguments.h"
 #include "argmanip.h"
 #define lambda(return_type,argument_tuple,body...) ({return_type lambda_func argument_tuple {opapply(;,body);}; lambda_func;})
 #define evtokens(args...) ({opapply(;,args);})
 
 #define reduce(func,arr) ({ typeof(arr[0]) accum=arr[0];\
-for(int i=1;i<(sizeof(arr)/sizeof(accum));i++)accum=func(accum,arr[i]); accum;})
+for(size_t i=1;i<(sizeof(arr)/sizeof(accum));i++)accum=func(accum,arr[i]); accum;})
