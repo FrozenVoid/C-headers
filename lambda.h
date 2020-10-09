@@ -32,7 +32,15 @@ example:
 int f1(int a,int b,int c,int d){return a*b*c*d;};
 int res=partial(int,f1,(int d,int c),(2,3,c,d))(6,7);
 print("\nResult:",res);//252
-  
+------compose
+compose(return_type,f1,f2,arg_formats...) creates function(arg_format) that executes
+ f1(f2(arg_formats var_names))  
+example:
+
+int f2(int c){return c*10;}
+int f1(int a,int b,int c,int d){return a*b*c*d;};
+int res=compose(int,f2,f1,(int a,int b,int c,int d),(a,b,c,d))(6,7,1,2);
+print("\nResult:",res);//840
 
 */
 #include <stdint.h>
@@ -51,3 +59,8 @@ i++){func(arr[i]);};arr;})
 
 
 #define partial(return_type,func,part_arg_tuple,final_tuple) ({ return_type partial_func part_arg_tuple {return func final_tuple;};partial_func;})
+
+#define compose(return_type,func1,func2,arg_formats,arg_names_tuple) ({return_type composed_func arg_formats {\
+return func1(func2 arg_names_tuple);};composed_func;})
+
+
