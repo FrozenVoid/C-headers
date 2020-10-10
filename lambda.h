@@ -33,7 +33,7 @@ int f1(int a,int b,int c,int d){return a*b*c*d;};
 int res=partial(int,f1,(int d,int c),(2,3,c,d))(6,7);
 print("\nResult:",res);//252
 ------compose
-compose(return_type,f1,f2,arg_formats...) creates function(arg_format) that executes
+compose(return_type,f1,f2,arg_formats,arg_names_tuple) creates function(arg_format) that executes
  f1(f2(arg_formats var_names))  
 example:
 
