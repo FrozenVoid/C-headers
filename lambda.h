@@ -4,7 +4,11 @@ lambda(return_type,(arguments),funcbody...) create a function
  to be return as executable.
 
 vlam((arguments),funcbody...) same as lambda returning void.
+lamptr(name,return_type,argument_tuple,body...) create a lambda pointer(function pointer) with specific name to be called later.
+
 examples:
+
+
 int res=lambda(int,(int a,int b),int c=b+a,return c*b*a)(2,3);
 print("result:",res,"\n");
 float res2=lambda(float,(float a,float b,float d),float c=b+a*d,return c*b*a)(4.0,3.5,4.401);
