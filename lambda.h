@@ -2,6 +2,8 @@
 /* lambda.h 
 lambda(return_type,(arguments),funcbody...) create a function
  to be return as executable.
+
+vlam((arguments),funcbody...) same as lambda returning void.
 examples:
 int res=lambda(int,(int a,int b),int c=b+a,return c*b*a)(2,3);
 print("result:",res,"\n");
@@ -47,6 +49,11 @@ print("\nResult:",res);//840
 #include "arguments.h"
 #include "argmanip.h"
 #define lambda(return_type,argument_tuple,body...) ({return_type lambda_func argument_tuple {opapply(;,body);}; lambda_func;})
+
+#define vlam(argument_tuple,body...) ({void lambda_func argument_tuple {opapply(;,body);}; lambda_func;})
+
+#define lamptr(name,return_type,argument_tuple,body...) typeof(lambda(return_type,argument_tuple,body))name=lambda(return_type,argument_tuple,body)
+
 #define evtokens(args...) ({opapply(;,args);})
 
 #define reduce(func,arr) ({ typeof(arr[0]) accum=arr[0];\
