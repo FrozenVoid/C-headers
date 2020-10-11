@@ -4,7 +4,7 @@ lambda(return_type,(arguments),funcbody...) create a function
  to be return as executable.
 
 vlam((arguments),funcbody...) same as lambda returning void.
-lamptr(name,return_type,argument_tuple,body...) create a lambda pointer(function pointer) with specific name to be called later.
+defun(name,return_type,argument_tuple,body...) create a lambda pointer(function pointer) with specific name to be called later.
 
 examples:
 
@@ -56,7 +56,7 @@ print("\nResult:",res);//840
 
 #define vlam(argument_tuple,body...) ({void lambda_func argument_tuple {opapply(;,body);}; lambda_func;})
 
-#define lamptr(name,return_type,argument_tuple,body...) typeof(lambda(return_type,argument_tuple,body))name=lambda(return_type,argument_tuple,body)
+#define defun(name,return_type,argument_tuple,body...) typeof(lambda(return_type,argument_tuple,body))name=lambda(return_type,argument_tuple,body)
 
 #define evtokens(args...) ({opapply(;,args);})
 
