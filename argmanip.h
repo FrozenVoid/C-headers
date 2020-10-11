@@ -15,12 +15,14 @@ fromlist(args...) convert tuple list to arglist ((1,2),(3,4))->(1,2,3.4)
 appendall(tup,args...) ((a,b,c),1,2,3) ->((a,b,c,1),(a,b,c,2),(a,b,c,3))
 prefixall(tup,args...) ((a,b,c),1,2,3) ->((1,a,b,c),(2,a,b,c),(3,a,b,c))
 rec2apply(func,args...) rec2apply(func,1,2,3,4)> func(1,func(2,func(3,4)));
+rec2applyt(func,(a,b,c),1,2,3,4,5)- > func (a,b,c)(1,func (a,b,c)(2,func (a,b,c)(3,func (a,b,c)(4,5))));
 */
 #define reverse(args...) dapply(swapargs,id,args)
 #define applyall(func,args...) chainapply(func,args)
 #define mergeall(args...) dapply(merge,id,args)
 #define toatom(args...) dapply(remcomma,id,args)
 #define rec2apply(func,args...) dapply(func,id,args)
+#define rec2applyt(func,tup,args...) dapply(func tup,id,args)
 
 #define firstarg(args...) first(args) //forwarding
 #define last(args...) firstarg(reverse(args))
