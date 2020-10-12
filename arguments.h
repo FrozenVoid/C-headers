@@ -4,9 +4,9 @@ argcount(...) count arguments min=0 max=1024
 isarg(...) quick check if there an argument(first argument exists)
 first(...) return first argument
 rest(...) return arguments after first argument.(a,args..)--> args
-id(...) return argument unmodified
+id(...) return arguments unmodified
+rem(...) remove arguments(replace with blank)
 swapargs(a,args...) return args,a(first argument last)
-isdefined(a) is the 'a' symbol defined (#if defined)
 istype(x,type) is x's type=type(1) or not (0)
 stringify(args...) turn arguments into a string(1,2,3)->"1,2,3"
 merge(a,b) merges two tokens(a,b)-> ab
@@ -28,6 +28,7 @@ toarray(name,args...) create array_name={args}
 #define merge1(a,b) a##b
 #define merge(a,b) merge1(a,b)
 #define id(args...) args
+#define rem(args...) 
 #define swapargs(a,args...) args,a
 #define tuple(args...) (args)
 #define detuple(arg) id arg
@@ -36,7 +37,6 @@ toarray(name,args...) create array_name={args}
 #define second(args...) first(rest(args))
 #define isarg1(args...) argcountq(args) 
 #define isarg(args...) isarg1(first(args))
-#define isdefined(arg) defined(arg) //gcc extension. from #if defined(x)
 #define stringify1(args...) #args
 #define stringify(args...) stringify1(args) 
 #define setapply(func,args...) func(args)
