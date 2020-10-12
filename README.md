@@ -1,6 +1,7 @@
 # C-headers
 Various C headers with utility macros/functions
 ------------
+Compiler assumed to be GCC 7 or newer
 ```
 argmanip - key functions 
 dapply - recursive applicative of two functions (func2(func(argN),func2(...))
