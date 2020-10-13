@@ -16,7 +16,10 @@ appendall(tup,args...) ((a,b,c),1,2,3) ->((a,b,c,1),(a,b,c,2),(a,b,c,3))
 prefixall(tup,args...) ((a,b,c),1,2,3) ->((1,a,b,c),(2,a,b,c),(3,a,b,c))
 rec2apply(func,args...) rec2apply(func,1,2,3,4)> func(1,func(2,func(3,4)));
 rec2applyt(func,(a,b,c),1,2,3,4,5)- > func (a,b,c)(1,func (a,b,c)(2,func (a,b,c)(3,func (a,b,c)(4,5))));
-dupapply(func,times,(1,2,3) apply func N times -> func((1,2,3)),...
+dupapply(func,times,(1,2,3)) apply func N times -> func((1,2,3)),...
+set(name,val) sets variable to val;
+dtset((name,val)) same as above with tuple format
+setall((name,val),(name2,val2),...) set tuple vars to values.
 */
 #define reverse(args...) dapply(swapargs,id,args)
 #define applyall(func,args...) chainapply(func,args)
@@ -28,7 +31,9 @@ dupapply(func,times,(1,2,3) apply func N times -> func((1,2,3)),...
 
 #define firstarg(args...) first(args) //forwarding
 #define last(args...) firstarg(reverse(args))
-
+#define set(name,val) typeof(val) name = val
+#define dtset(tup) typeof(second tup) first tup = second tup;
+#define setall(tup_args...) toatom(applyall(dtset,tup_args))
 #define genargs(n,arg) merge(chainapply,n)(arg id,) 
 
 #define dupapply(func,n,args_tup) chainapply(func,genargs(n,args_tup))
