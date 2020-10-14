@@ -15,7 +15,8 @@ float res2=lambda(float,(float a,float b,float d),float c=b+a*d,return c*b*a)(4.
 print("result:",res2,"\n");
 ----
 evtokens(args...) convert tokens to executable statements(last expr is returned)
-
+callf(func,args...) return statement expression to call function in it.
+---------
 reduce(func,arr) apply func to each element of array,return result
 int arr[]={1,2,3,4,5,6,7,8,9};
 int res=reduce(lambda(int,(int acc,int b),return acc+b),arr);
@@ -59,6 +60,7 @@ print("\nResult:",res);//840
 #define defun(name,return_type,argument_tuple,body...) typeof(lambda(return_type,argument_tuple,body))name=lambda(return_type,argument_tuple,body)
 
 #define evtokens(args...) ({opapply(;,args);})
+#define callf(func,args...) ({func(args);})
 
 #define reduce(func,arr) ({ typeof(arr[0]) accum=arr[0];\
 for(size_t i=1;i<(sizeof(arr)/sizeof(accum));i++)accum=func(accum,arr[i]); accum;})
