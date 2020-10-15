@@ -1,6 +1,6 @@
 #pragma once /* Coroutines for C*/
 /*   
-cbegin()  - start coroutine block
+cbegin()  - start coroutine block(assumed to be inside function)
 cret([arg]) - return a (optional) value, set to continue after this return
 cend([arg])  - end block with final return with optinal arg.
 creset([arg]) -  reset the switch, returning optional args(as cret),
@@ -23,9 +23,7 @@ see https://www.chiark.greenend.org.uk/~sgtatham/coroutines.html
 #define cret(args...) do{\
  c_switch_l = __LINE__;return args;case __LINE__:;}\
 while(0)
-#define creset(args...) do{\
- c_switch_l = 0;return args;}\
-while(0)
+#define creset(args...) c_switch_l = 0;return args;
 #define cwait(cond,args...) do{\
  c_switch_l = __LINE__;case __LINE__:;if(!(cond)) return args;}\
 while(0)
