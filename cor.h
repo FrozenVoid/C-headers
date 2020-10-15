@@ -1,6 +1,6 @@
 #pragma once /* Coroutines for C*/
 /*   
-cbegin  - start coroutine block
+cbegin()  - start coroutine block
 cret([arg]) - return a (optional) value, set to continue after this return
 cend([arg])  - end block with final return with optinal arg.
 creset([arg]) -  reset the switch, returning optional args(as cret),
