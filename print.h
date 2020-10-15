@@ -95,8 +95,8 @@ double:  "%A",\
 
 #define core_print1(delim,file,format_type,arg) \
 fprintf(file,delim),fprintf(file,format_type(arg),arg)
-#define print1(arg) core_print1(SPACE_DELIM,stdout,pformat,arg)
-#define hexprint1(arg) core_print1(SPACE_DELIM,stdout,hexformat,arg)
+#define print1(arg) printf(SPACE_DELIM),printf(pformat(arg),arg)
+#define hexprint1(arg) printf(SPACE_DELIM),printf(hexformat(arg),arg)
 
 #define scan1(arg) scanf(scanformat(arg),&arg)
 #define hexscan1(arg) scanf(hexscanformat(arg),&arg)
@@ -114,7 +114,7 @@ fprintf(file,delim),fprintf(file,format_type(arg),arg)
 #define hexfprint2(file,arg) core_print1(SPACE_DELIM,file,hexformat,arg)
 #define hexfprint1(tup) hexfprint2 tup
 
-#define dprint2(delim,arg) core_print1(delim,stdout,hexformat,arg)
+#define dprint2(delim,arg) printf(delim),printf(pformat(arg),arg)
 #define dprint1(tup) dprint2 tup
 
 #define hexdprint2(delim,arg) core_print1(delim,stdout,hexformat,arg)
@@ -151,3 +151,4 @@ fprintf(file,delim),fprintf(file,format_type(arg),arg)
 
 #define fscan(file,args...) chainapply(fscan1,appendall((file),args))
 #define hexfscan(file,args...) chainapply(hexfscan1,appendall((file),args))
+
