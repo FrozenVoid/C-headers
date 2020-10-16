@@ -135,12 +135,13 @@ fprintf(file,"%s%s",delim,&output[index+1]);\
 
 
 //print _Decimal128,_Decimal64,_Decimal32 format support : decy=number
-#define decprf1(file,delim,decy) ({typeof(decy) x=decy; int n=1;\
+#define decprf1(file,delim,decy) ({typeof(decy) x=decy; int n=0;\
 char sign=' ';\
 if(x<0){x=-x;sign='-';}\
-while(x>10000){x/=10;n++;};\
+while(x>=10){x/=10;n++;};\
+while(x<1){x*=10;n--;};\
 long double d=(long double)x;\
-fprintf(file,"%s%c%."stringify(LDBL_DIG) "LG",delim,sign,d);if(n>1)fprintf(file,"e%d",n);\
+fprintf(file,"%s%c%."stringify(LDBL_DIG) "LG",delim,sign,d);if(n!=0)fprintf(file,"e%d",n);\
 ;})
 #define decprd1(delim,decy) decprf1(stdout,delim,decy)
 #define decpr1(decy) decprf1(stdout,SPACE_DELIM,decy)
