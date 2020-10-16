@@ -3,6 +3,7 @@
 #include <inttypes.h>
 #include <float.h>
 #include <stdio.h>
+#include <string.h>
 #include "argmanip.h"
 /* print.h print/scan macros
 print(args) print all arguments(space separated)
@@ -31,6 +32,13 @@ support for printing _DecimalN formats
  decprf(file,delim,args...) args = _Decimal numbers
  decprd(delim,args...) 
  decpr(args...) 
+----
+Support for printing larger integer types > uint64_t
+arbprf(file,delim,args...) args= integers
+ arbprd(delim,args...) 
+ arbpr(args...) 
+
+arbsprint(str,arby) print large integer arb to string(str)
 */
 #define SPACE_DELIM " "
 #define pformat(x) _Generic((x),\
@@ -96,6 +104,34 @@ uint8_t:  "%" PRIx8,\
  float:  "%A",\
 double:  "%A",\
  long double: "%LA" )
+
+//arbsprint print larger integer to string;
+#define arbsprint(str,arby)  ({typeof(arby) x=arby,ten=(typeof(arby))10;\
+char sign=' ';int index=strlen(str)-1;\
+if(x<0){x=-x;sign='-';};\
+do{str[index--]=(x % ten) + '0'; x /= ten;}while(x > 0);\
+str[index--]=sign;\
+;})
+
+//large integer formats supported by GCC
+#define arbprf1(file,delim,arby)  ({typeof(arby) x=arby,ten=(typeof(arby))10;\
+char sign=' ';int index=126;\
+ char output[128];output[127]=0;\
+if(x<0){x=-x;sign='-';};\
+do{output[index--]=(x % ten) + '0'; x /= ten;}while(x > 0);\
+output[index--]=sign;\
+fprintf(file,"%s%s",delim,&output[index+1]);\
+;})
+
+#define arbprd1(delim,arby) arbprf1(stdout,delim,arby)
+#define arbpr1(arby) arbprf1(stdout,SPACE_DELIM,arby)
+
+#define arbprf(file,delim,args...) chainapply(arbprf1,args)
+#define arbprd(delim,args...) chainapply(arbprd1,args)
+#define arbpr(args...) chainapply(arbpr1,args)
+
+
+
 
 
 //print _Decimal128,_Decimal64,_Decimal32 format support : decy=number
