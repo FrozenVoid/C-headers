@@ -26,6 +26,11 @@ example:
 long double g;
 fscan(stdin,g);//&g is automatic
 print("\nscanned:",g);
+---
+support for printing _DecimalN formats
+ decprf(file,delim,args...) args = _Decimal numbers
+ decprd(delim,args...) 
+ decpr(args...) 
 */
 #define SPACE_DELIM " "
 #define pformat(x) _Generic((x),\
@@ -91,6 +96,22 @@ uint8_t:  "%" PRIx8,\
  float:  "%A",\
 double:  "%A",\
  long double: "%LA" )
+
+
+//print _Decimal128,_Decimal64,_Decimal32 format support : decy=number
+#define decprf1(file,delim,decy) ({typeof(decy) x=decy; int n=1;\
+char sign=' ';\
+if(x<0){x=-x;sign='-';}\
+while(x>10000){x/=10;n++;};\
+long double d=(long double)x;\
+fprintf(file,"%s%c%."stringify(LDBL_DIG) "LG",delim,sign,d);if(n>1)fprintf(file,"e%d",n);\
+;})
+#define decprd1(delim,decy) decprf1(stdout,delim,decy)
+#define decpr1(decy) decprf1(stdout,SPACE_DELIM,decy)
+
+#define decprf(file,delim,args...) chainapply(decprf1,args)
+#define decprd(delim,args...) chainapply(decprd1,args)
+#define decpr(args...) chainapply(decpr1,args)
 
 
 #define core_print1(delim,file,format_type,arg) \
