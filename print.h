@@ -74,14 +74,14 @@ double:  "%." stringify(DBL_DIG) "A",\
  long double: "%." stringify(LDBL_DIG)"LA" )
 
 #define scanformat(x) _Generic((x),\
-uint64_t: "%" PRIu64,\
- int64_t: "%" PRIi64,\
-uint32_t: "%" PRIu32,\
- int32_t: "%" PRIi32,\
-uint16_t: "%" PRIu16,\
- int16_t: "%" PRIi16,\
-uint8_t:  "%" PRIu8,\
- int8_t:  "%" PRIi8,\
+uint64_t: "%" SCNu64,\
+ int64_t: "%" SCNi64,\
+uint32_t: "%" SCNu32,\
+ int32_t: "%" SCNi32,\
+uint16_t: "%" SCNu16,\
+ int16_t: "%" SCNi16,\
+uint8_t:  "%" SCNu8,\
+ int8_t:  "%" SCNi8,\
  char:   "%c",\
  char*:  "%s",\
  void*: "%p",\
@@ -90,14 +90,14 @@ double:  "%G",\
  long double: "%LG" )
 
 #define hexscanformat(x) _Generic((x),\
-uint64_t: "%" PRIx64,\
- int64_t: "%" PRIx64,\
-uint32_t: "%" PRIx32,\
- int32_t: "%" PRIx32,\
-uint16_t: "%" PRIx16,\
- int16_t: "%" PRIx16,\
-uint8_t:  "%" PRIx8,\
- int8_t:  "%" PRIx8,\
+uint64_t: "%" SCNx64,\
+ int64_t: "%" SCNx64,\
+uint32_t: "%" SCNx32,\
+ int32_t: "%" SCNx32,\
+uint16_t: "%" SCNx16,\
+ int16_t: "%" SCNx16,\
+uint8_t:  "%" SCNx8,\
+ int8_t:  "%" SCNx8,\
  char:   "%c",\
  char*:  "%s",\
  void*: "%p",\
@@ -110,7 +110,7 @@ double:  "%A",\
 char sign=' ';int index=strlen(str)-1;\
 if(x<0){x=-x;sign='-';};\
 do{str[index--]=(x % ten) + '0'; x /= ten;}while(x > 0);\
-str[index--]=sign;\
+str[index]=sign;\
 ;})
 
 //large integer formats supported by GCC
@@ -119,8 +119,8 @@ char sign=' ';int index=126;\
  char output[128];output[127]=0;\
 if(x<0){x=-x;sign='-';};\
 do{output[index--]=(x % ten) + '0'; x /= ten;}while(x > 0);\
-output[index--]=sign;\
-fprintf(file,"%s%s",delim,&output[index+1]);\
+output[index]=sign;\
+fprintf(file,"%s%s",delim,&output[index]);\
 ;})
 
 #define arbprd1(delim,arby) arbprf1(stdout,delim,arby)
