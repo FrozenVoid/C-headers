@@ -28,7 +28,7 @@ long double g;
 fscan(stdin,g);//&g is automatic
 print("\nscanned:",g);
 ---
-support for printing _DecimalN formats
+support for printing _DecimalN/__floatN formats
  decprf(file,delim,args...) args = _Decimal numbers
  decprd(delim,args...) 
  decpr(args...) 
@@ -142,14 +142,15 @@ fprintf(file,"%s%s",delim,&output[index]);\
 
 
 
-//print _Decimal128,_Decimal64,_Decimal32 format support : decy=number
+//print _DecimalN and __floatX format support : decy=number
 #define decprf1(file,delim,decy) ({typeof(decy) x=decy; int n=0;\
 char sign=' ';\
 if(x<0){x=-x;sign='-';}\
 while(x>=10){x/=10;n++;};\
 while(x<1){x*=10;n--;};\
 long double d=(long double)x;\
-fprintf(file,"%s%c%."stringify(LDBL_DIG) "LG",delim,sign,d);if(n!=0)fprintf(file,"e%d",n);\
+fprintf(file,"%s%c%."stringify(LDBL_DIG) "LG",delim,sign,d);\
+if(n!=0)fprintf(file,"e%d",n);\
 ;})
 #define decprd1(delim,decy) decprf1(stdout,delim,decy)
 #define decpr1(decy) decprf1(stdout,SPACE_DELIM,decy)
