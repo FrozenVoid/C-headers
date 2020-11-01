@@ -42,6 +42,8 @@ arbsprint(str,arby) print large integer arb to string(str)
 */
 #define SPACE_DELIM " "
 #define pformat(x) _Generic((x),\
+long long unsigned int: "%" PRIu64,\
+long long int: "%" PRIi64,\
 uint64_t: "%" PRIu64,\
  int64_t: "%" PRIi64,\
 uint32_t: "%" PRIu32,\
@@ -58,6 +60,8 @@ double:  "%." stringify(DBL_DIG) "G",\
  long double: "%." stringify(LDBL_DIG) "LG" )
 
 #define hexformat(x) _Generic((x),\
+long long unsigned int: "%" PRIx64,\
+long long int: "%" PRIx64,\
 uint64_t: "%" PRIx64,\
  int64_t: "%" PRIx64,\
 uint32_t: "%" PRIx32,\
@@ -74,6 +78,8 @@ double:  "%." stringify(DBL_DIG) "A",\
  long double: "%." stringify(LDBL_DIG)"LA" )
 
 #define scanformat(x) _Generic((x),\
+long long unsigned int: "%" SCNu64,\
+long long int: "%" SCNi64,\
 uint64_t: "%" SCNu64,\
  int64_t: "%" SCNi64,\
 uint32_t: "%" SCNu32,\
@@ -90,6 +96,8 @@ double:  "%G",\
  long double: "%LG" )
 
 #define hexscanformat(x) _Generic((x),\
+long long unsigned int: "%" SCNx64,\
+long long int: "%" SCNx64,\
 uint64_t: "%" SCNx64,\
  int64_t: "%" SCNx64,\
 uint32_t: "%" SCNx32,\
@@ -209,4 +217,5 @@ fprintf(file,delim),fprintf(file,format_type(arg),arg)
 
 #define fscan(file,args...) chainapply(fscan1,appendall((file),args))
 #define hexfscan(file,args...) chainapply(hexfscan1,appendall((file),args))
+
 
