@@ -18,6 +18,9 @@ onearg(args...) is there exactly one argument(non-empty)
 mergetuples(a,b) ((1,2,3),(4,5,6)) -> (1,2,3,4,5,6)
 toexpr(args...) execute arguments as statement expression(GCC extensions)
 toarray(name,args...) create array_name={args}
+atype __auto_type (GCC extension)
+ret alias to return
+
 */
 
 #include "argcount.h"
@@ -25,6 +28,8 @@ toarray(name,args...) create array_name={args}
     #define argcount_qc(args...) argcount_q1(args) 
     //  args push>>> n. 3,2,1 :: :args:<numbers> 
     #define argcountq(...) argcount_qc(0,##__VA_ARGS__,2,1,0)
+    #define atype __auto_type
+    #define ret return
 #define merge1(a,b) a##b
 #define merge(a,b) merge1(a,b)
 #define id(args...) args
