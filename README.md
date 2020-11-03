@@ -1,9 +1,10 @@
 # C-headers
 Various C headers with utility macros/functions
-#include "directory_name/void.h" //to include all headers.
+
 ------------
 Compiler assumed to be GCC 7 or newer
 ```
+#include "directory_name/void.h" //to include all headers.
 argmanip - key functions 
 dapply - recursive applicative of two functions (func2(func(argN),func2(...))
 tapply - apply to fixed tuple and each argument(func(tup,argN),...)
