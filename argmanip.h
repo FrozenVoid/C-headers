@@ -39,6 +39,8 @@ setall((name,val),(name2,val2),...) set tuple vars to values.
 #define dupapply(func,n,args_tup) chainapply(func,genargs(n,args_tup))
 #define tolists(args...) chainapply(tuple,args)
 #define fromlists(args...) chainapply(detuple,args)
+#define with(vars,args...) for(detuple(vars);;){opapply(;,args);break;} 
+
 
 #define appendall1(tup,arg) mergetuples(tup,(arg))
 #define prefixall1(tup,arg) mergetuples((arg),tup)
@@ -54,4 +56,5 @@ setall((name,val),(name2,val2),...) set tuple vars to values.
 #define suball(args...) opapply(-,args)
 #define multall(args...) opapply(*,args)
 #define divall(args...) opapply(/,args)
+
 
