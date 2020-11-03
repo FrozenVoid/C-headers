@@ -12,6 +12,7 @@ opapply(op,args...) -> arg1 op arg2 op arg3 ...
 genargs(n,arg) repeat arg N times
 tolists(args...) converts arglist to list of tuples (1,2,3)->((1),(2),(3))
 fromlist(args...) convert tuple list to arglist ((1,2),(3,4))->(1,2,3,4)
+with((type var1=val,var3=val2),args...) for(type var1=val,var3=val2;;){args; break;} //args converted from arg1,arg2,arg3-> arg1;arg2;arg3
 appendall(tup,args...) ((a,b,c),1,2,3) ->((a,b,c,1),(a,b,c,2),(a,b,c,3))
 prefixall(tup,args...) ((a,b,c),1,2,3) ->((1,a,b,c),(2,a,b,c),(3,a,b,c))
 rec2apply(func,args...) rec2apply(func,1,2,3,4)> func(1,func(2,func(3,4)));
