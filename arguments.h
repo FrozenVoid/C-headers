@@ -20,6 +20,7 @@ toexpr(args...) execute arguments as statement expression(GCC extensions)
 toarray(name,args...) create array_name={args}
 atype __auto_type (GCC extension)
 ret alias to return
+optnext(a,b...) if optnext(a)->a optnext(a,b)->b : return second argument if it exists,first if not
 
 */
 
@@ -56,3 +57,6 @@ ret alias to return
 #define toexpr(args...) ({args;})
 #define toarray(name,args...) typeof(first(args)) name[]={args}
 #define istype(x,type) (_Generic((x),type:1,default:0))
+#define optnext0(default,args...) default
+#define optnext1(default,args...) args
+#define optnext(default,optional...) merge(optnext,isarg(optional))(default,optional)
