@@ -18,7 +18,7 @@
 #include <string.h>
 #include <tgmath.h>
 #include <time.h>
-
+#include <unistd.h>
 
 #include "argcount.h"
 #include "argmanip.h"
