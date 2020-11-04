@@ -21,7 +21,7 @@ toarray(name,args...) create array_name={args}
 atype __auto_type (GCC extension)
 ret alias to return
 optnext(a,b...) if optnext(a)->a optnext(a,b)->b : return second argument if it exists,first if not
-
+ternary(cond,a,b) return a if cond==true, b if not.
 */
 
 #include "argcount.h"
@@ -55,6 +55,7 @@ optnext(a,b...) if optnext(a)->a optnext(a,b)->b : return second argument if it 
 #define onearg(args...) merge(onearg,merge(isarg(first(args)),isarg(first(rest(args)))))
 #define mergetuples(a,b) (detuple(a),detuple(b))
 #define toexpr(args...) ({args;})
+#define ternary(condition,trueexpr,falseexpr) ({(condition)?toexpr(trueexpr):toexpr(falseexpr);})
 #define toarray(name,args...) typeof(first(args)) name[]={args}
 #define istype(x,type) (_Generic((x),type:1,default:0))
 #define optnext0(default,args...) default
