@@ -17,6 +17,8 @@ with(int a=1,func(a)) -> {int a=1; func(a);}
 appendall(tup,args...) ((a,b,c),1,2,3) ->((a,b,c,1),(a,b,c,2),(a,b,c,3))
 prefixall(tup,args...) ((a,b,c),1,2,3) ->((1,a,b,c),(2,a,b,c),(3,a,b,c))
 rec2apply(func,args...) rec2apply(func,1,2,3,4)> func(1,func(2,func(3,4)));
+rect2apply(func,tuples...) rect2apply(func,(1),(2),(3),(4))> func(1,func(2,func(3,4)));
+rect2apply(function,(1,2),(2,3),(3,4),(4,5))  - > function(1,2,function(2,3,function(3,4,4,5)));
 rec2applyt(func,(a,b,c),1,2,3,4,5)- > func (a,b,c)(1,func (a,b,c)(2,func (a,b,c)(3,func (a,b,c)(4,5))));
 dupapply(func,times,(1,2,3)) apply func N times -> func((1,2,3)),...
 set(name,val) sets variable to val;
@@ -28,6 +30,7 @@ setall((name,val),(name2,val2),...) set tuple vars to values.
 #define mergeall(args...) dapply(merge,id,args)
 #define toatom(args...) dapply(remcomma,id,args)
 #define rec2apply(func,args...) dapply(func,id,args)
+#define rect2apply(func,tuples...) dapply(func,detuple,tuples)
 #define rec2applyt(func,tup,args...) dapply(func tup,id,args)
 
 
@@ -54,9 +57,9 @@ setall((name,val),(name2,val2),...) set tuple vars to values.
 
 #define opapply(op,arg1,args...) arg1 dapply(remcomma,op id,args)
 //examples
-#define addall(args...) opapply(+,args)
-#define suball(args...) opapply(-,args)
-#define multall(args...) opapply(*,args)
-#define divall(args...) opapply(/,args)
+#define addall(args...) ({opapply(+,args);})
+#define suball(args...) ({opapply(-,args);})
+#define multall(args...) ({opapply(*,args);})
+#define divall(args...) ({opapply(/,args);})
 
 
