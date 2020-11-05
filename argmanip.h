@@ -24,7 +24,8 @@ dupapply(func,times,(1,2,3)) apply func N times -> func((1,2,3)),...
 set(name,val) sets variable to val;
 dtset((name,val)) same as above with tuple format
 setall((name,val),(name2,val2),...) set tuple vars to values.
-cond((cond1,result),(cond2,result),...) return first tuple with condition evaluation to true or 0 if none march.
+cond((cond1,result),(cond2,result),...) return first tuple with condition evaluation to true or 0 if none match.
+condelse(default,(cond1,result),(cond2,result),...) return first tuple with condition evaluation to true or 'default' if none match.
 */
 #define reverse(args...) dapply(swapargs,id,args)
 #define applyall(func,args...) chainapply(func,args)
@@ -48,7 +49,7 @@ cond((cond1,result),(cond2,result),...) return first tuple with condition evalua
 #define with(args...) {opapply(;,args);}
 #define cond1(tup,arg) ternary((first tup),second tup,arg)
 #define cond(tuples...) ({rec2apply(cond1,tuples,0);})
-
+#define condelse(default,tuples...) ({rec2apply(cond1,tuples,default);})
 #define appendall1(tup,arg) mergetuples(tup,(arg))
 #define prefixall1(tup,arg) mergetuples((arg),tup)
 
