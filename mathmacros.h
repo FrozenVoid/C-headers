@@ -17,4 +17,4 @@ u64log2(x) return interger log2 value of uint64_t number
 while(1){result=func(current); \
 double thisdiff=fabs(result-current);\
 if(thisdiff>=diff){break;}\
-diff=thisdiff;current=result;} ;result;})
+diff=thisdiff;current=result;} ;current;})
