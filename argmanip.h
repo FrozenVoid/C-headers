@@ -2,6 +2,7 @@
 #include "dapply.h"
 #include "tapply.h"
 #include "chainapply.h"
+#include "recapply.h"
 /* argmanip.h
 reverse(args) reverse argument order(1,2,3)-> 3,2,1
 applyall(func,args) apply func to each argument-> func(arg1),func(arg2),...
@@ -42,6 +43,7 @@ orfirst(args...) return first true argument, 0 if none true.
 
 #define firstarg(args...) first(args) //forwarding
 #define last(args...) firstarg(reverse(args))
+#define ntharg(n,arg...)   firstarg(merge(rec2chainapply,n)(rest,0,arg))
 #define set(name,val) typeof(val) name = val
 #define dtset(tup) typeof(second tup) first tup = second tup;
 #define setall(tup_args...) toatom(applyall(dtset,tup_args))
