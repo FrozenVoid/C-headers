@@ -19,7 +19,7 @@
 #include <tgmath.h>
 #include <time.h>
 #include <unistd.h>
-
+#include "array.h"
 #include "argcount.h"
 #include "argmanip.h"
 #include "arguments.h"
