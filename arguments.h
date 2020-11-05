@@ -23,6 +23,7 @@ ret alias to return
 optnext(a,b...) if optnext(a)->a optnext(a,b)->b : return second argument if it exists,first if not
 ternary(cond,a,b) return a if cond==true, b if not.
 iftrue(x,y) return x if X is true,Y otherwise.
+negate(args...) negate last expression (!x), (func(),2,3)=>(!3)
 */
 
 #include "argcount.h"
@@ -35,6 +36,7 @@ iftrue(x,y) return x if X is true,Y otherwise.
 #define merge1(a,b) a##b
 #define merge(a,b) merge1(a,b)
 #define id(args...) args
+#define negate(args...) (!(args))
 #define rem(args...) 
 #define swapargs(a,args...) args,a
 #define tuple(args...) (args)
