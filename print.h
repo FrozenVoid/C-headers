@@ -56,50 +56,6 @@ uint8_t:  "%" PRIu8,\
  int8_t:  "%" PRIi8,\
  char:   "%c",\
  char*:  "%s",\
- void*: "%p",\
- char**:  "%p",\
- void**: "%p",\
- char***:  "%p",\
- void***: "%p",\
-long long unsigned int*: "%p",\
-long long int*: "%p",\
-uint64_t*: "%p",\
- int64_t*: "%p",\
-uint32_t*: "%p",\
- int32_t*: "%p",\
-uint16_t*: "%p",\
- int16_t*: "%p",\
-uint8_t*:  "%p",\
- int8_t*:  "%p",\
- float*:  "%p",\
- double*:  "%p",\
-  long double*:  "%p",\
-long long unsigned int**: "%p",\
-long long int**: "%p",\
-uint64_t**: "%p",\
- int64_t**: "%p",\
-uint32_t**: "%p",\
- int32_t**: "%p",\
-uint16_t**: "%p",\
- int16_t**: "%p",\
-uint8_t**:  "%p",\
- int8_t**:  "%p",\
- float**:  "%p",\
- double**:  "%p",\
-  long double**:  "%p",\
-long long unsigned int***: "%p",\
-long long int***: "%p",\
-uint64_t***: "%p",\
- int64_t***: "%p",\
-uint32_t***: "%p",\
- int32_t***: "%p",\
-uint16_t***: "%p",\
- int16_t***: "%p",\
-uint8_t***:  "%p",\
- int8_t***:  "%p",\
- float***:  "%p",\
- double***:  "%p",\
-  long double***:  "%p",\
  float:  "%." stringify(FLT_DIG) "G",\
 double:  "%." stringify(DBL_DIG) "G",\
  long double: "%." stringify(LDBL_DIG) "LG",\
@@ -118,51 +74,7 @@ uint8_t:  "%" PRIx8,\
  int8_t:  "%" PRIx8,\
  char:   "%c",\
  char*:  "%s",\
- void*: "%p",\
- char**:  "%p",\
- void**: "%p",\
- char***:  "%p",\
- void***: "%p",\
-long long unsigned int*: "%p",\
-long long int*: "%p",\
-uint64_t*: "%p",\
- int64_t*: "%p",\
-uint32_t*: "%p",\
- int32_t*: "%p",\
-uint16_t*: "%p",\
- int16_t*: "%p",\
-uint8_t*:  "%p",\
- int8_t*:  "%p",\
- float*:  "%p",\
- double*:  "%p",\
-  long double*:  "%p",\
-long long unsigned int**: "%p",\
-long long int**: "%p",\
-uint64_t**: "%p",\
- int64_t**: "%p",\
-uint32_t**: "%p",\
- int32_t**: "%p",\
-uint16_t**: "%p",\
- int16_t**: "%p",\
-uint8_t**:  "%p",\
- int8_t**:  "%p",\
- float**:  "%p",\
- double**:  "%p",\
-  long double**:  "%p",\
-long long unsigned int***: "%p",\
-long long int***: "%p",\
-uint64_t***: "%p",\
- int64_t***: "%p",\
-uint32_t***: "%p",\
- int32_t***: "%p",\
-uint16_t***: "%p",\
- int16_t***: "%p",\
-uint8_t***:  "%p",\
- int8_t***:  "%p",\
- float***:  "%p",\
- double***:  "%p",\
-  long double***:  "%p",\
- float:  "%." stringify(FLT_DIG)"A",\
+  float:  "%." stringify(FLT_DIG)"A",\
 double:  "%." stringify(DBL_DIG) "A",\
  long double: "%." stringify(LDBL_DIG)"LA",\
 default:"%p" )
@@ -180,50 +92,6 @@ uint8_t:  "%" SCNu8,\
  int8_t:  "%" SCNi8,\
  char:   "%c",\
  char*:  "%s",\
- void*: "%p",\
- char**:  "%p",\
- void**: "%p",\
- char***:  "%p",\
- void***: "%p",\
-long long unsigned int*: "%p",\
-long long int*: "%p",\
-uint64_t*: "%p",\
- int64_t*: "%p",\
-uint32_t*: "%p",\
- int32_t*: "%p",\
-uint16_t*: "%p",\
- int16_t*: "%p",\
-uint8_t*:  "%p",\
- int8_t*:  "%p",\
- float*:  "%p",\
- double*:  "%p",\
-  long double*:  "%p",\
-long long unsigned int**: "%p",\
-long long int**: "%p",\
-uint64_t**: "%p",\
- int64_t**: "%p",\
-uint32_t**: "%p",\
- int32_t**: "%p",\
-uint16_t**: "%p",\
- int16_t**: "%p",\
-uint8_t**:  "%p",\
- int8_t**:  "%p",\
- float**:  "%p",\
- double**:  "%p",\
-  long double**:  "%p",\
-long long unsigned int***: "%p",\
-long long int***: "%p",\
-uint64_t***: "%p",\
- int64_t***: "%p",\
-uint32_t***: "%p",\
- int32_t***: "%p",\
-uint16_t***: "%p",\
- int16_t***: "%p",\
-uint8_t***:  "%p",\
- int8_t***:  "%p",\
- float***:  "%p",\
- double***:  "%p",\
-  long double***:  "%p",\
  float:  "%G",\
 double:  "%G",\
  long double: "%LG" ,\
@@ -242,50 +110,6 @@ uint8_t:  "%" SCNx8,\
  int8_t:  "%" SCNx8,\
  char:   "%c",\
  char*:  "%s",\
- void*: "%p",\
- char**:  "%p",\
- void**: "%p",\
- char***:  "%p",\
- void***: "%p",\
-long long unsigned int*: "%p",\
-long long int*: "%p",\
-uint64_t*: "%p",\
- int64_t*: "%p",\
-uint32_t*: "%p",\
- int32_t*: "%p",\
-uint16_t*: "%p",\
- int16_t*: "%p",\
-uint8_t*:  "%p",\
- int8_t*:  "%p",\
- float*:  "%p",\
- double*:  "%p",\
-  long double*:  "%p",\
-long long unsigned int**: "%p",\
-long long int**: "%p",\
-uint64_t**: "%p",\
- int64_t**: "%p",\
-uint32_t**: "%p",\
- int32_t**: "%p",\
-uint16_t**: "%p",\
- int16_t**: "%p",\
-uint8_t**:  "%p",\
- int8_t**:  "%p",\
- float**:  "%p",\
- double**:  "%p",\
-  long double**:  "%p",\
-long long unsigned int***: "%p",\
-long long int***: "%p",\
-uint64_t***: "%p",\
- int64_t***: "%p",\
-uint32_t***: "%p",\
- int32_t***: "%p",\
-uint16_t***: "%p",\
- int16_t***: "%p",\
-uint8_t***:  "%p",\
- int8_t***:  "%p",\
- float***:  "%p",\
- double***:  "%p",\
-  long double***:  "%p",\
  float:  "%A",\
 double:  "%A",\
  long double: "%LA" ,\
