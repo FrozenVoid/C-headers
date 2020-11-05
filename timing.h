@@ -2,6 +2,7 @@
 #include <x86intrin.h>//__rdtsc
 #include <stdint.h>
 #include <time.h> //clock_gettime
+#include <stdio.h>
 #include "argmanip.h"
 /* walltime(args...) - (double precision) seconds of argument execution time
 nanoseconds(args...) - uint64_t nanoseconds of argument execution time
@@ -31,4 +32,4 @@ opapply(;,args);clock_gettime(CLOCK_MONOTONIC_RAW, &end);\
 (end.tv_sec - start.tv_sec) ;})
 
 #define timing(args...) ({uint64_t start=__rdtsc();opapply(;,args);__rdtsc()-start;})
-
+#define waitinput() ({char c;printf("\nPress Enter to continue:");scanf("%c",&c);c;})
