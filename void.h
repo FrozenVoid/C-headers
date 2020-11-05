@@ -28,11 +28,13 @@
 #include "cor.h"
 #include "dapply.h"
 #include "enumclass.h"
+
 #include "lambda.h" 
 #include "mathmacros.h"
 #include "print.h"
 #include "random.h"
 #include "remtype.h"
+#include "recapply.h"
 #include "size.h"
 #include "tapply.h"
 #include "timing.h"
