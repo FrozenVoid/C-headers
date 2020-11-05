@@ -12,6 +12,7 @@ u64log2(x) return interger log2 value of uint64_t number
 average(x,y) return average of x/y
 averagedamp(func) return function that returns average of x/func(x)
 tmin/tmax  min/max of two numbers
+derivative  - lambda of derivative(function)
 */
 #define numberof(str) strtoll(str,NULL,10)
 #define hexnumberof(str) strtoll(str,NULL,16)
