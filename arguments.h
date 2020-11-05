@@ -22,6 +22,7 @@ atype __auto_type (GCC extension)
 ret alias to return
 optnext(a,b...) if optnext(a)->a optnext(a,b)->b : return second argument if it exists,first if not
 ternary(cond,a,b) return a if cond==true, b if not.
+iftrue(x,y) return x if X is true,Y otherwise.
 */
 
 #include "argcount.h"
@@ -56,8 +57,10 @@ ternary(cond,a,b) return a if cond==true, b if not.
 #define mergetuples(a,b) (detuple(a),detuple(b))
 #define toexpr(args...) ({args;})
 #define ternary(condition,trueexpr,falseexpr) ({(condition)?toexpr(trueexpr):toexpr(falseexpr);})
+#define iftrue(x,y) ternary(x,x,y)
 #define toarray(name,args...) typeof(first(args)) name[]={args}
 #define istype(x,type) (_Generic((x),type:1,default:0))
 #define optnext0(default,args...) default
 #define optnext1(default,args...) args
 #define optnext(default,optional...) merge(optnext,isarg(optional))(default,optional)
+
