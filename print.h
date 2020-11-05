@@ -57,9 +57,53 @@ uint8_t:  "%" PRIu8,\
  char:   "%c",\
  char*:  "%s",\
  void*: "%p",\
+ char**:  "%p",\
+ void**: "%p",\
+ char***:  "%p",\
+ void***: "%p",\
+long long unsigned int*: "%p",\
+long long int*: "%p",\
+uint64_t*: "%p",\
+ int64_t*: "%p",\
+uint32_t*: "%p",\
+ int32_t*: "%p",\
+uint16_t*: "%p",\
+ int16_t*: "%p",\
+uint8_t*:  "%p",\
+ int8_t*:  "%p",\
+ float*:  "%p",\
+ double*:  "%p",\
+  long double*:  "%p",\
+long long unsigned int**: "%p",\
+long long int**: "%p",\
+uint64_t**: "%p",\
+ int64_t**: "%p",\
+uint32_t**: "%p",\
+ int32_t**: "%p",\
+uint16_t**: "%p",\
+ int16_t**: "%p",\
+uint8_t**:  "%p",\
+ int8_t**:  "%p",\
+ float**:  "%p",\
+ double**:  "%p",\
+  long double**:  "%p",\
+long long unsigned int***: "%p",\
+long long int***: "%p",\
+uint64_t***: "%p",\
+ int64_t***: "%p",\
+uint32_t***: "%p",\
+ int32_t***: "%p",\
+uint16_t***: "%p",\
+ int16_t***: "%p",\
+uint8_t***:  "%p",\
+ int8_t***:  "%p",\
+ float***:  "%p",\
+ double***:  "%p",\
+  long double***:  "%p",\
  float:  "%." stringify(FLT_DIG) "G",\
 double:  "%." stringify(DBL_DIG) "G",\
- long double: "%." stringify(LDBL_DIG) "LG" )
+ long double: "%." stringify(LDBL_DIG) "LG",\
+default:"%p" )
 
 #define hexformat(x) _Generic((x),\
 long long unsigned int: "%" PRIx64,\
@@ -75,9 +119,53 @@ uint8_t:  "%" PRIx8,\
  char:   "%c",\
  char*:  "%s",\
  void*: "%p",\
+ char**:  "%p",\
+ void**: "%p",\
+ char***:  "%p",\
+ void***: "%p",\
+long long unsigned int*: "%p",\
+long long int*: "%p",\
+uint64_t*: "%p",\
+ int64_t*: "%p",\
+uint32_t*: "%p",\
+ int32_t*: "%p",\
+uint16_t*: "%p",\
+ int16_t*: "%p",\
+uint8_t*:  "%p",\
+ int8_t*:  "%p",\
+ float*:  "%p",\
+ double*:  "%p",\
+  long double*:  "%p",\
+long long unsigned int**: "%p",\
+long long int**: "%p",\
+uint64_t**: "%p",\
+ int64_t**: "%p",\
+uint32_t**: "%p",\
+ int32_t**: "%p",\
+uint16_t**: "%p",\
+ int16_t**: "%p",\
+uint8_t**:  "%p",\
+ int8_t**:  "%p",\
+ float**:  "%p",\
+ double**:  "%p",\
+  long double**:  "%p",\
+long long unsigned int***: "%p",\
+long long int***: "%p",\
+uint64_t***: "%p",\
+ int64_t***: "%p",\
+uint32_t***: "%p",\
+ int32_t***: "%p",\
+uint16_t***: "%p",\
+ int16_t***: "%p",\
+uint8_t***:  "%p",\
+ int8_t***:  "%p",\
+ float***:  "%p",\
+ double***:  "%p",\
+  long double***:  "%p",\
  float:  "%." stringify(FLT_DIG)"A",\
 double:  "%." stringify(DBL_DIG) "A",\
- long double: "%." stringify(LDBL_DIG)"LA" )
+ long double: "%." stringify(LDBL_DIG)"LA",\
+default:"%p" )
 
 #define scanformat(x) _Generic((x),\
 long long unsigned int: "%" SCNu64,\
@@ -93,9 +181,53 @@ uint8_t:  "%" SCNu8,\
  char:   "%c",\
  char*:  "%s",\
  void*: "%p",\
+ char**:  "%p",\
+ void**: "%p",\
+ char***:  "%p",\
+ void***: "%p",\
+long long unsigned int*: "%p",\
+long long int*: "%p",\
+uint64_t*: "%p",\
+ int64_t*: "%p",\
+uint32_t*: "%p",\
+ int32_t*: "%p",\
+uint16_t*: "%p",\
+ int16_t*: "%p",\
+uint8_t*:  "%p",\
+ int8_t*:  "%p",\
+ float*:  "%p",\
+ double*:  "%p",\
+  long double*:  "%p",\
+long long unsigned int**: "%p",\
+long long int**: "%p",\
+uint64_t**: "%p",\
+ int64_t**: "%p",\
+uint32_t**: "%p",\
+ int32_t**: "%p",\
+uint16_t**: "%p",\
+ int16_t**: "%p",\
+uint8_t**:  "%p",\
+ int8_t**:  "%p",\
+ float**:  "%p",\
+ double**:  "%p",\
+  long double**:  "%p",\
+long long unsigned int***: "%p",\
+long long int***: "%p",\
+uint64_t***: "%p",\
+ int64_t***: "%p",\
+uint32_t***: "%p",\
+ int32_t***: "%p",\
+uint16_t***: "%p",\
+ int16_t***: "%p",\
+uint8_t***:  "%p",\
+ int8_t***:  "%p",\
+ float***:  "%p",\
+ double***:  "%p",\
+  long double***:  "%p",\
  float:  "%G",\
 double:  "%G",\
- long double: "%LG" )
+ long double: "%LG" ,\
+default:"%p")
 
 #define hexscanformat(x) _Generic((x),\
 long long unsigned int: "%" SCNx64,\
@@ -111,9 +243,53 @@ uint8_t:  "%" SCNx8,\
  char:   "%c",\
  char*:  "%s",\
  void*: "%p",\
+ char**:  "%p",\
+ void**: "%p",\
+ char***:  "%p",\
+ void***: "%p",\
+long long unsigned int*: "%p",\
+long long int*: "%p",\
+uint64_t*: "%p",\
+ int64_t*: "%p",\
+uint32_t*: "%p",\
+ int32_t*: "%p",\
+uint16_t*: "%p",\
+ int16_t*: "%p",\
+uint8_t*:  "%p",\
+ int8_t*:  "%p",\
+ float*:  "%p",\
+ double*:  "%p",\
+  long double*:  "%p",\
+long long unsigned int**: "%p",\
+long long int**: "%p",\
+uint64_t**: "%p",\
+ int64_t**: "%p",\
+uint32_t**: "%p",\
+ int32_t**: "%p",\
+uint16_t**: "%p",\
+ int16_t**: "%p",\
+uint8_t**:  "%p",\
+ int8_t**:  "%p",\
+ float**:  "%p",\
+ double**:  "%p",\
+  long double**:  "%p",\
+long long unsigned int***: "%p",\
+long long int***: "%p",\
+uint64_t***: "%p",\
+ int64_t***: "%p",\
+uint32_t***: "%p",\
+ int32_t***: "%p",\
+uint16_t***: "%p",\
+ int16_t***: "%p",\
+uint8_t***:  "%p",\
+ int8_t***:  "%p",\
+ float***:  "%p",\
+ double***:  "%p",\
+  long double***:  "%p",\
  float:  "%A",\
 double:  "%A",\
- long double: "%LA" )
+ long double: "%LA" ,\
+default: "%p")
 
 //arbsprint print larger integer to string;
 #define arbsprint(str,arby)  ({typeof(arby) x=arby,ten=(typeof(arby))10;\
