@@ -37,6 +37,9 @@ restslice(n,args...) return arguments after Nth argument(including Nth)
 frontslice(n,args...) return first N arguments
 listslice(start,length,args...) return slice of arglist from StartNth  with length arguments 
 rlistslice(end,length,args...) return slice of arglist from Nth to Nth-Length argument from end with Length arguments 
+remlast(args...) remove last argument from list
+removenth(args...) remove Nth argument from list
+removenth(args...) remove Nth argument from list's end
 */
 #define reverse(args...) dapply(swapargs,id,args)
 #define applyall(func,args...) chainapply(func,args)
@@ -48,13 +51,19 @@ rlistslice(end,length,args...) return slice of arglist from Nth to Nth-Length ar
 
 
 #define firstarg(args...) first(args) //forwarding
-#define last(args...) firstarg(reverse(args))
+#define last(args...) firstarg(reverse2(args))
+
+#define forwremlast(a) reverse(rest(a))
+#define remlast(args...) forwremlast(reverse(args))
 #define ntharg(n,arg...)   firstarg(merge(rec2chainapply,n)(rest,0,arg))
 #define rntharg(n,arg...) ntharg(n,reverse(arg))
 #define restslice(n,arg...) merge(rec2chainapply,n)(rest,0,arg)
 #define frontslice(n,arg...) merge(chainapply,n)(id,arg)
 #define listslice(start,len,arg...)  frontslice(len,restslice(start,arg))
 #define rlistslice(end,len,arg...)  reverse(frontslice(len,restslice(end,reverse(arg))))
+#define removenth(n,arg...) remlast(frontslice(n,arg)),restslice(n,rest(arg))
+#define removernth(n,arg...)   reverse(removenth(n,reverse(arg)))
+
 
 #define set(name,val) typeof(val) name = val
 #define dtset(tup) typeof(second tup) first tup = second tup;
