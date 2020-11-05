@@ -19,6 +19,7 @@ derivative  - lambda of derivative(function)
 
 #define tmin(x,y) ({typeof(x) tminx=x,tminy=y,res=tminy<tminx?tminy:tminx;      ;res;})
 #define tmax(x,y) ({typeof(x) tminx=x,tminy=y,res=tminy>tminx?tminy:tminx;      ;res;})
+#define tabs(x) ({typeof(x) res=x;res<0?-res:res;})
 
 #define u64log2(X) ((unsigned) (8*sizeof (unsigned long long) - __builtin_clzll((X)) - 1))
 #define issigned(x) (((typeof(x))-1)<((typeof(x))0))
