@@ -26,6 +26,10 @@ dtset((name,val)) same as above with tuple format
 setall((name,val),(name2,val2),...) set tuple vars to values.
 cond((cond1,result),(cond2,result),...) return first tuple with condition evaluation to true or 0 if none match.
 condelse(default,(cond1,result),(cond2,result),...) return first tuple with condition evaluation to true or 'default' if none match.
+orall(args...) apply short-circuit OR || which returns 1 if any condition is true,0 otherwise
+andall(args...) apply short-circuit AND&& which returns 1 if all conditions are true,0 otherwise
+andlast(args...) return last argument if all arguments are true, 0 otherwise.
+orfirst(args...) return first true argument, 0 if none true.
 */
 #define reverse(args...) dapply(swapargs,id,args)
 #define applyall(func,args...) chainapply(func,args)
@@ -66,5 +70,6 @@ condelse(default,(cond1,result),(cond2,result),...) return first tuple with cond
 #define divall(args...) ({opapply(/,args);})
 #define andall(args...) ({opapply(&&,args);})
 #define orall(args...) ({opapply(||,args);})
-#define andlast(args...) ({andall(args)?(args):0;}) //(1,2,3)->(1)&&(3) 
+#define orfirst(args...) ({rec2apply(iftrue,args,0);})
+#define andlast(args...) ({andall(args)?last(args):0;}) //(1,2,3)->(1)&&(3) 
 
