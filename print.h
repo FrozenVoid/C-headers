@@ -8,6 +8,8 @@
 /* print.h print/scan macros
 print(args) print all arguments(space separated)
 hexprint(args) prints all arguments in hex(except strings)
+dbgprint(args) prints all arguments to stderr
+dbghexprint(args) prints all arguments to stderr in hex(if possible)
 
 dprint(delim,args) prints all arguments separated by delim string
 hexdprint(delim,args) hex prints all arguments separated by delim string
@@ -218,5 +220,6 @@ fprintf(file,delim),fprintf(file,format_type(arg),arg)
 
 #define fscan(file,args...) chainapply(fscan1,appendall((file),args))
 #define hexfscan(file,args...) chainapply(hexfscan1,appendall((file),args))
-
+#define dbgprint(args...) fprint(stdarr,args)
+#define dbghexprint(args...) hexfprint(stdarr,args)
 
