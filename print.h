@@ -220,6 +220,6 @@ fprintf(file,delim),fprintf(file,format_type(arg),arg)
 
 #define fscan(file,args...) chainapply(fscan1,appendall((file),args))
 #define hexfscan(file,args...) chainapply(hexfscan1,appendall((file),args))
-#define dbgprint(args...) fprint(stdarr,args)
-#define dbghexprint(args...) hexfprint(stdarr,args)
+#define dbgprint(args...) fprint(stderr,args)
+#define dbghexprint(args...) hexfprint(stderr,args)
 
