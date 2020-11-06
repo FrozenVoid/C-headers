@@ -40,6 +40,9 @@ rlistslice(end,length,args...) return slice of arglist from Nth to Nth-Length ar
 remlast(args...) remove last argument from list
 removenth(args...) remove Nth argument from list
 removenth(args...) remove Nth argument from list's end
+ insertnth(n,arg,args...) insert arg at Nth place in arglist
+insertrnth(n,arg,args...) nsert arg at Nth place in arglist from end
+
 */
 #define reverse(args...) dapply(swapargs,id,args)
 #define applyall(func,args...) chainapply(func,args)
@@ -63,6 +66,11 @@ removenth(args...) remove Nth argument from list's end
 #define rlistslice(end,len,arg...)  reverse(frontslice(len,restslice(end,reverse(arg))))
 #define removenth(n,arg...) remlast(frontslice(n,arg)),restslice(n,rest(arg))
 #define removernth(n,arg...)   reverse(removenth(n,reverse(arg)))
+
+
+#define insertnth(n,arg,args...) skiparg(remlast(frontslice(n,args)),arg,restslice(n,args))
+#define insertrnth(n,arg,args...) reverse(insertnth(n,arg,reverse(args)))
+
 
 
 #define set(name,val) typeof(val) name = val
