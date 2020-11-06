@@ -27,7 +27,7 @@ negate(args...) negate last expression (!x), (func(),2,3)=>(!3)
 skiparg(x,args...) skip first argument if it doesn't exist(empty argument)
  insertbefore(arg,args...)  ->arg,args...
 insertafter(arg,args...) ->args...,arg
-
+istuple(a)   1 if argument is tuple(x,y,...) or 0 if not,(1)/((b)) 1-arg tuples treated as arguments.
 */
 
 #include "argcount.h"
@@ -53,6 +53,7 @@ insertafter(arg,args...) ->args...,arg
 #define second(args...) first(rest(args))
 #define isarg1(args...) argcountq(args) 
 #define isarg(args...) isarg1(first(args))
+#define istuple(a) isarg(second(id a))
 #define skiparg0(x,args...) args
 #define skiparg1(x,args...) x,args
 #define skiparg(x,args...) merge(skiparg,isarg(x))(x,args)
