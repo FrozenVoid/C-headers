@@ -42,7 +42,9 @@ removenth(args...) remove Nth argument from list
 removenth(args...) remove Nth argument from list's end
  insertnth(n,arg,args...) insert arg at Nth place in arglist
 insertrnth(n,arg,args...) nsert arg at Nth place in arglist from end
-
+//evaluate a if a is a tuple, by using first argument as function
+evtuple(a)  if a is tuple ->(func,args...) ->func(arg1),func(arg2),func(arg3).... else return a
+evtuplef(a)  if a is tuple->(func,args...) ->func(arg1,arg2,arg3...) else return a
 */
 #define reverse(args...) dapply(swapargs,id,args)
 #define applyall(func,args...) chainapply(func,args)
@@ -77,6 +79,18 @@ insertrnth(n,arg,args...) nsert arg at Nth place in arglist from end
 #define dtset(tup) typeof(second tup) first tup = second tup;
 #define setall(tup_args...) toatom(applyall(dtset,tup_args))
 #define genargs(n,arg) merge(chainapply,n)(arg id,) 
+
+#define evtuple0(a...) a
+#define evtuplex(func,args...) applyall(func,remlast(args))
+#define evtuplex2(args...) evtuplex(args)
+#define evtuple1(a)  evtuplex2(detuple(a),0) 
+#define evtuple(a) merge(evtuple,istuple(a))(a)
+
+#define evtuplef0(a...) a
+#define evtuplexf(func,args...) func(remlast(args))
+#define evtuplexf2(args...) evtuplexf(args)
+#define evtuplef1(a)  evtuplexf2(detuple(a),0) 
+#define evtuplef(a) merge(evtuplef,istuple(a))(a)
 
 #define dupapply(func,n,args_tup) chainapply(func,genargs(n,args_tup))
 #define tolists(args...) chainapply(tuple,args)
