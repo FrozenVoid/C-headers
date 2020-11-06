@@ -24,6 +24,7 @@ optnext(a,b...) if optnext(a)->a optnext(a,b)->b : return second argument if it 
 ternary(cond,a,b) return a if cond==true, b if not.
 iftrue(x,y) return x if X is true,Y otherwise.
 negate(args...) negate last expression (!x), (func(),2,3)=>(!3)
+skiparg(x,args...) skip first argument if it doesn't exist(empty argument)
 */
 
 #include "argcount.h"
@@ -46,6 +47,10 @@ negate(args...) negate last expression (!x), (func(),2,3)=>(!3)
 #define second(args...) first(rest(args))
 #define isarg1(args...) argcountq(args) 
 #define isarg(args...) isarg1(first(args))
+#define skiparg0(x,args...) args
+#define skiparg1(x,args...) x,args
+#define skiparg(x,args...) merge(skiparg,isarg(x))(x,args)
+
 #define stringify1(args...) #args
 #define stringify(args...) stringify1(args) 
 #define setapply(func,args...) func(args)
