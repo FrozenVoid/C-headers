@@ -43,8 +43,18 @@ removenth(args...) remove Nth argument from list's end
  insertnth(n,arg,args...) insert arg at Nth place in arglist
 insertrnth(n,arg,args...) nsert arg at Nth place in arglist from end
 //evaluate a if a is a tuple, by using first argument as function
-evtuple(a)  if a is tuple ->(func,args...) ->func(arg1),func(arg2),func(arg3).... else return a
-evtuplef(a)  if a is tuple->(func,args...) ->func(arg1,arg2,arg3...) else return a
+//if the a is not a turple the argument is returned as is
+#define evtuplewith0(func,a...) a
+#define evtuplewithx(func,args...) func(args)
+#define evtuplewithx2(func,args...) evtuplewithx(func,remlast(args))
+#define evtuplewith1(func,a)  evtuplewithx2(func,detuple(a),0) 
+#define evtuplewith(func,a) merge(evtuplewith,istuple(a))(func,a)
+//if the argument isn't a tuple(a,b,c...) (2+ arg tuple) the argument is unchanged
+ evtuplerec(a) evtuplewith(rec2apply,a) -> rec2apply(a...) or a
+ evtupleda(a) evtuplewith(dapply,a)  opapply(a...) or a
+ evtupleop(a) evtuplewith(opapply,a)  opapply(a...) or a
+evtupleap(a) evtuplewith(applyall,a) applyall(a...) or a
+ evtuplef(a) evtuplewith(setapply,a) setapply(a...) or a
 */
 #define reverse(args...) dapply(swapargs,id,args)
 #define applyall(func,args...) chainapply(func,args)
@@ -73,24 +83,24 @@ evtuplef(a)  if a is tuple->(func,args...) ->func(arg1,arg2,arg3...) else return
 #define insertnth(n,arg,args...) skiparg(remlast(frontslice(n,args)),arg,restslice(n,args))
 #define insertrnth(n,arg,args...) reverse(insertnth(n,arg,reverse(args)))
 
+#define evtuplewith0(func,a...) a
+#define evtuplewithx(func,args...) func(args)
+#define evtuplewithx2(func,args...) evtuplewithx(func,remlast(args))
+#define evtuplewith1(func,a)  evtuplewithx2(func,detuple(a),0) 
+#define evtuplewith(func,a) merge(evtuplewith,istuple(a))(func,a)
 
+#define evtuplerec(a) evtuplewith(rec2apply,a)
+#define evtupleda(a) evtuplewith(dapply,a)
+#define evtupleop(a) evtuplewith(opapply,a)
+#define evtupleap(a) evtuplewith(applyall,a)
+#define evtuplef(a) evtuplewith(setapply,a)
 
 #define set(name,val) typeof(val) name = val
 #define dtset(tup) typeof(second tup) first tup = second tup;
 #define setall(tup_args...) toatom(applyall(dtset,tup_args))
 #define genargs(n,arg) merge(chainapply,n)(arg id,) 
 
-#define evtuple0(a...) a
-#define evtuplex(func,args...) applyall(func,remlast(args))
-#define evtuplex2(args...) evtuplex(args)
-#define evtuple1(a)  evtuplex2(detuple(a),0) 
-#define evtuple(a) merge(evtuple,istuple(a))(a)
 
-#define evtuplef0(a...) a
-#define evtuplexf(func,args...) func(remlast(args))
-#define evtuplexf2(args...) evtuplexf(args)
-#define evtuplef1(a)  evtuplexf2(detuple(a),0) 
-#define evtuplef(a) merge(evtuplef,istuple(a))(a)
 
 #define dupapply(func,n,args_tup) chainapply(func,genargs(n,args_tup))
 #define tolists(args...) chainapply(tuple,args)
