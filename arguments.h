@@ -25,6 +25,9 @@ ternary(cond,a,b) return a if cond==true, b if not.
 iftrue(x,y) return x if X is true,Y otherwise.
 negate(args...) negate last expression (!x), (func(),2,3)=>(!3)
 skiparg(x,args...) skip first argument if it doesn't exist(empty argument)
+ insertbefore(arg,args...)  ->arg,args...
+insertafter(arg,args...) ->args...,arg
+
 */
 
 #include "argcount.h"
@@ -34,6 +37,9 @@ skiparg(x,args...) skip first argument if it doesn't exist(empty argument)
     #define argcountq(...) argcount_qc(0,##__VA_ARGS__,2,1,0)
     #define atype __auto_type
     #define ret return
+#define insertbefore(arg,args...) arg,args
+#define insertafter(arg,args...) args,arg
+
 #define merge1(a,b) a##b
 #define merge(a,b) merge1(a,b)
 #define id(args...) args
