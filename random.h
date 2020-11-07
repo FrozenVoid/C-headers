@@ -17,8 +17,6 @@ randuint8() integer from 0 to UINT8_MAX
 randfloat() random float in range 0.0-1.0
 
 range(reccomended)::
-varnd(var,start,end) macro sets var to value in range start<>end 
-rnd(start,end)  macro expands to one of functions below
 
 frange (start,end) float in specific range,if argument is floating point
 rrange(start,end) integer in specific range(use randuint64()&n for powers of 2 which will be faster than modulus due opcode latency)
@@ -30,7 +28,7 @@ rrange(start,end) integer in specific range(use randuint64()&n for powers of 2 w
 /*xoroshiro random generator from http://prng.di.unimi.it/xoshiro256starstar.c */
 
 #define rnd() randuint(randuint_seed)
-#define varnd(var,start,end) var=rnd(start,end)
+
 
 #define rndseed(s) randuint(s)
 #define ROTL(x,k) ({ typeof(x) res=(x); typeof(k) shift=(k);\
