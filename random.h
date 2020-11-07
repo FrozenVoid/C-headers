@@ -2,9 +2,12 @@
 
 #include <stdint.h>
 /*
-
-
+rndseed(s) use specific seed 
+rnd() use default seed to generate random number
+setrseed(a,b,c,d) set the generator seed vals[4]
 raw numbers::
+
+
 randuint128() integer from 0 to UINT128_MAX(if available)
 randuint64() integer from 0 to UINT64_MAX
 randuint32() integer from 0 to UINT32_MAX
@@ -26,30 +29,27 @@ rrange(start,end) integer in specific range(use randuint64()&n for powers of 2 w
 
 /*xoroshiro random generator from http://prng.di.unimi.it/xoshiro256starstar.c */
 
-#define rnd(start,end) _Generic((end),double:frange,float:frange,long double:frange,default:rrange)(start,end)
+#define rnd() randuint(randuint_seed)
 #define varnd(var,start,end) var=rnd(start,end)
 
-uint64_t xrotl(uint64_t x,uint32_t k){//compiles to ROTL
-return (x << k) | (x >> (64 - k));}
+#define rndseed(s) randuint(s)
+#define ROTL(x,k) ({ typeof(x) res=(x); typeof(k) shift=(k);\
+res=(res<<shift)|(res>>((sizeof(res)*8) -shift));res;})
 
 
-uint64_t randuint64(void) {
-        static uint64_t s[4]={123456789,123456789,123456789,123456789};
+   static uint64_t randuint_seed[4]={123456789,123456789,123456789,123456789};
 
-	const uint64_t result = xrotl(s[1] * 5, 7) * 9;
+#define randuint(s) ({  ;\
+const uint64_t result = ROTL(s[1] * 5, 7) * 9;\
+	const uint64_t t = s[1] << 17;\
+	s[2] ^= s[0];s[3] ^= s[1];s[1] ^= s[2];s[0] ^= s[3];s[2] ^= t;\
+s[3] = ROTL(s[3], 45);result;     })
 
-	const uint64_t t = s[1] << 17;
+#define setrseed(a,b,c,d) ({randuint_seed[0]=a;randuint_seed[1]=b;randuint_seed[2]=c;\
+randuint_seed[3]=d;})
 
-	s[2] ^= s[0];
-	s[3] ^= s[1];
-	s[1] ^= s[2];
-	s[0] ^= s[3];
+#define randuint64() randuint(randuint_seed)
 
-	s[2] ^= t;
-
-	s[3] = xrotl(s[3], 45);
-	return result;
-}
 
 typedef union rndintconv64{
 uint64_t a64;
@@ -58,28 +58,25 @@ uint16_t a16;
 uint8_t a8;
 } rndintconv64;
 #ifdef __SIZEOF_INT128__ 
-unsigned __int128 randuint128(void){union {unsigned __int128 a;
-uint64_t b[2];} d;
-d.b[0]=randuint64();
-d.b[1]=randuint64();
-;return d.a;} 
+#define randuint128() ({\
+union {unsigned __int128 a;uint64_t b[2];} d;\
+d.b[0]=randuint64();d.b[1]=randuint64();d.a;})
+
 #endif 
-uint32_t randuint32(void){rndintconv64 a;a.a64=randuint64(); return a.a32;}
-uint16_t randuint16(void){rndintconv64 a;a.a64=randuint64(); return a.a16;}
-uint8_t randuint8(void) {rndintconv64 a;a.a64=randuint64(); return a.a8;}
-uint8_t rndbyte(void){// (rnd()>>((rnd()>>31)&31))&0xff
-return (uint8_t)((randuint64()>>((randuint64()>>31)&31))&0xff);}
 
-uint64_t rrange(uint64_t start,uint64_t end){
-return (randuint64()%(end-start))+start;}
+#define randuint32() ({rndintconv64 a;a.a64=randuint64();  a.a32;})
+#define randuint16()  ({rndintconv64 a;a.a64=randuint64(); a.a16;})
+#define randuint8() ({rndintconv64 a;a.a64=randuint64();  a.a8;})
+#define rndbyte() ({   (uint8_t)((randuint64()>>((randuint64()>>31)&31))&0xff);  })
 
-double uintdouble01(uint64_t x){//range 0.0-1.0
-     const union { uint64_t i; double d; } u = { .i = UINT64_C(0x3FF) << 52 | x >> 12 };\
-       return u.d - 1.0;}
+#define rrange(start,end) ({typeof(end) start1=start,end1=end;\
+ ((randuint64()%(end1-start1))+start1);})
+
+#define uintdouble01(x) ({     const union { uint64_t i; double d; } u = { .i = UINT64_C(0x3FF) << 52 | x >> 12 }; u.d-1.0;  })
+
+#define randfloat() uintdouble01(randuint64())
+#define frange(start,end) ({typeof(end) start1=start,end1=end;\
+ ((uintdouble01(randuint64())*(end1-start1))+start1);})
 
 
-double randfloat(void){ return uintdouble01(randuint64());}
-
-double frange(double start, double end){
- return (uintdouble01(randuint64())*(end-start))+start; }
 
