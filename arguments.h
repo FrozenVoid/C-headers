@@ -52,7 +52,7 @@ rapply(func,1,2,3)-> func(1),func(2),func(3),..(max 10k args)
     #define argcountq(...) argcount_qc(0,##__VA_ARGS__,2,1,0)
     #define atype __auto_type
     #define ret return
-//deferred eval for recursive functions
+//deferred eval for recursive functions(note;this is impossible to debug)
 #define ev00(args...) args
 #define ev10(args...) ev00(ev00(ev00(ev00(ev00(ev00(ev00(ev00(ev00(ev00(args))))))))))
 #define ev20(args...) ev10(ev10(ev10(ev10(ev10(ev10(ev10(ev10(ev10(ev10(args))))))))))
@@ -68,14 +68,6 @@ rapply(func,1,2,3)-> func(1),func(2),func(3),..(max 10k args)
 #define rapply_impl(func,args...) merge(merge(rapply_impl,isarg(args)),isarg(second(args)))(func,args)
 #define rapply(func,args...) evrec(rapply_impl(func,args))
 
-#define revargs_id() revargs_impl
-#define revargs_impl00(...) //no arguments
-#define revargs_impl10(a,args...)  a
-#define revargs_impl01(a,args...) //invalid first arg
-#define revargs_impl11(a,args...) defereval(revargs_id)(args),a
-#define revargs_impl(args...) merge(merge(revargs_impl,isarg(args)),isarg(second(args)))(args)
-#define revargs(args...) evrec(revargs_impl(args)) 
-#define reverse revargs//simplified dapply(swapargs,id,args)
 
 
 #define insertbefore(arg,args...) arg,args
