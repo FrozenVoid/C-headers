@@ -44,6 +44,8 @@ arbsprint(str,arby) print large integer arb to string(str)
 */
 #define SPACE_DELIM " "
 #define pformat(x) _Generic((x),\
+ char:   "%c",\
+ char*:  "%s",\
 long long unsigned int: "%" PRIu64,\
 long long int: "%" PRIi64,\
 uint64_t: "%" PRIu64,\
@@ -54,14 +56,14 @@ uint16_t: "%" PRIu16,\
  int16_t: "%" PRIi16,\
 uint8_t:  "%" PRIu8,\
  int8_t:  "%" PRIi8,\
- char:   "%c",\
- char*:  "%s",\
  float:  "%." stringify(FLT_DIG) "G",\
 double:  "%." stringify(DBL_DIG) "G",\
  long double: "%." stringify(LDBL_DIG) "LG",\
 default:"%p" )
 
 #define hexformat(x) _Generic((x),\
+ char:   "%c",\
+ char*:  "%s",\
 long long unsigned int: "%" PRIx64,\
 long long int: "%" PRIx64,\
 uint64_t: "%" PRIx64,\
@@ -72,14 +74,14 @@ uint16_t: "%" PRIx16,\
  int16_t: "%" PRIx16,\
 uint8_t:  "%" PRIx8,\
  int8_t:  "%" PRIx8,\
- char:   "%c",\
- char*:  "%s",\
   float:  "%." stringify(FLT_DIG)"A",\
 double:  "%." stringify(DBL_DIG) "A",\
  long double: "%." stringify(LDBL_DIG)"LA",\
 default:"%p" )
 
 #define scanformat(x) _Generic((x),\
+ char:   "%c",\
+ char*:  "%s",\
 long long unsigned int: "%" SCNu64,\
 long long int: "%" SCNi64,\
 uint64_t: "%" SCNu64,\
@@ -90,14 +92,14 @@ uint16_t: "%" SCNu16,\
  int16_t: "%" SCNi16,\
 uint8_t:  "%" SCNu8,\
  int8_t:  "%" SCNi8,\
- char:   "%c",\
- char*:  "%s",\
  float:  "%G",\
 double:  "%G",\
  long double: "%LG" ,\
 default:"%p")
 
 #define hexscanformat(x) _Generic((x),\
+ char:   "%c",\
+ char*:  "%s",\
 long long unsigned int: "%" SCNx64,\
 long long int: "%" SCNx64,\
 uint64_t: "%" SCNx64,\
@@ -108,8 +110,6 @@ uint16_t: "%" SCNx16,\
  int16_t: "%" SCNx16,\
 uint8_t:  "%" SCNx8,\
  int8_t:  "%" SCNx8,\
- char:   "%c",\
- char*:  "%s",\
  float:  "%A",\
 double:  "%A",\
  long double: "%LA" ,\
