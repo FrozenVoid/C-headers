@@ -41,7 +41,6 @@ example:
 #define rapply_impl(func,args...) merge(merge(rapply_impl,isarg(args)),isarg(second(args)))(func,args)
 #define rapply(func,args...) evrec(rapply_impl(func,args))
 rapply(func,1,2,3)-> func(1),func(2),func(3),..(max 10k args)
-dapply(func,func2,a,args...) recursively expands to func2(func(arg1),func2(func(arg2),func2(...)))
 
 
 */
