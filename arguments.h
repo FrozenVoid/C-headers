@@ -82,7 +82,8 @@ rapply(func,1,2,3)-> func(1),func(2),func(3),..(max 10k args)
 #define tuple(args...) (args)
 #define detuple(arg) id arg
 #define rest(a,args...) args
-#define first(a,args...) a
+#define first1(a,args...) a
+#define first(a,args...) first1(a...)
 #define second(args...) first(rest(args))
 #define isarg1(args...) argcountq(args) 
 #define isarg(args...) isarg1(first(args))
