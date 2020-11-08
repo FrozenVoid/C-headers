@@ -41,6 +41,9 @@ example:
 #define rapply_impl(func,args...) merge(merge(rapply_impl,isarg(args)),isarg(second(args)))(func,args)
 #define rapply(func,args...) evrec(rapply_impl(func,args))
 rapply(func,1,2,3)-> func(1),func(2),func(3),..(max 10k args)
+dapply(func,func2,a,args...) recursively expands to func2(func(arg1),func2(func(arg2),func2(...)))
+
+
 */
 
 #include "argcount.h"
@@ -51,11 +54,21 @@ rapply(func,1,2,3)-> func(1),func(2),func(3),..(max 10k args)
     #define atype __auto_type
     #define ret return
 //deferred eval for recursive functions
-#define ev10(args...) id(id(id(id(id(id(id(id(id(id(args))))))))))
+#define ev00(args...) args
+#define ev10(args...) ev00(ev00(ev00(ev00(ev00(ev00(ev00(ev00(ev00(ev00(args))))))))))
 #define ev20(args...) ev10(ev10(ev10(ev10(ev10(ev10(ev10(ev10(ev10(ev10(args))))))))))
 #define ev30(args...) ev20(ev20(ev20(ev20(ev20(ev20(ev20(ev20(ev20(ev20(args))))))))))
 #define evrec(args...) ev30(ev30(ev30(ev30(ev30(ev30(ev30(ev30(ev30(ev30(args))))))))))
 #define defereval(func_id) func_id rem()()
+
+#define rapply_id() rapply_impl
+#define rapply_impl00(func,a,args...)
+#define rapply_impl10(func,a,args...) func(a)
+#define rapply_impl01(func,a,args...) defereval(rapply_id)(func,args)
+#define rapply_impl11(func,a,args...) func(a),defereval(rapply_id)(func,args)
+#define rapply_impl(func,args...) merge(merge(rapply_impl,isarg(args)),isarg(second(args)))(func,args)
+#define rapply(func,args...) evrec(rapply_impl(func,args))
+
 
 #define insertbefore(arg,args...) arg,args
 #define insertafter(arg,args...) args,arg
