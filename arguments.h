@@ -25,6 +25,7 @@ ternary(cond,a,b) return a if cond==true, b if not.
 iftrue(x,y) return x if X is true,Y otherwise.
 negate(args...) negate last expression (!x), (func(),2,3)=>(!3)
 skiparg(x,args...) skip first argument if it doesn't exist(empty argument)
+skipf(func,args...) apply func(args) if args exist
  insertbefore(arg,args...)  ->arg,args...
 insertafter(arg,args...) ->args...,arg
 istuple(a)   1 if argument is tuple(x,y,...) or 0 if not,(1)/((b)) 1-arg tuples treated as arguments.
@@ -57,6 +58,9 @@ istuple(a)   1 if argument is tuple(x,y,...) or 0 if not,(1)/((b)) 1-arg tuples 
 #define skiparg0(x,args...) args
 #define skiparg1(x,args...) x,args
 #define skiparg(x,args...) merge(skiparg,isarg(x))(x,args)
+#define skipf0(func,args...) 
+#define skipf1(func,args...) func(args)
+#define skipf(func,args...) merge(skiparg,isarg(args))(func,args)
 
 #define stringify1(args...) #args
 #define stringify(args...) stringify1(args) 
