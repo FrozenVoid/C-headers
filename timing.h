@@ -10,6 +10,7 @@ microseconds(args...) - uint64_t microseconds of argument execution time
 milliseconds(args...) - uint64_t milliseconds of argument execution time
 
 timing(args...)uint64_t CPU clock cycles of argument execution time
+ waitinput()  wait until user presses Enter(interactive)
 */
 
 #define walltime(args...) ({ time_t start;time(&start);opapply(;,args);time_t end;time(&end);\
