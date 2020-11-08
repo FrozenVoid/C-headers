@@ -68,6 +68,15 @@ rapply(func,1,2,3)-> func(1),func(2),func(3),..(max 10k args)
 #define rapply_impl(func,args...) merge(merge(rapply_impl,isarg(args)),isarg(second(args)))(func,args)
 #define rapply(func,args...) evrec(rapply_impl(func,args))
 
+#define revargs_id() revargs_impl
+#define revargs_impl00(...) //no arguments
+#define revargs_impl10(a,args...)  a
+#define revargs_impl01(a,args...) //invalid first arg
+#define revargs_impl11(a,args...) defereval(revargs_id)(args),a
+#define revargs_impl(args...) merge(merge(revargs_impl,isarg(args)),isarg(second(args)))(args)
+#define revargs(args...) evrec(revargs_impl(args)) 
+#define reverse revargs//simplified dapply(swapargs,id,args)
+
 
 #define insertbefore(arg,args...) arg,args
 #define insertafter(arg,args...) args,arg
