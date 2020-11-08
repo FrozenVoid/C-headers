@@ -30,6 +30,17 @@ skipf(func,args...) apply func(args) if args exist
 insertafter(arg,args...) ->args...,arg
 istuple(a)   1 if argument is tuple(x,y,...) or 0 if not,(1)/((b)) 1-arg tuples treated as arguments.
 argeval(tuplefunc,atomfunc,a)  if a is a tuple tuplefunc(detuple a) else atomfunc(a),if a isn't argument return nothing
+evrec(args) evaluate deferred recursive functions(up to 10k iterations)
+defereval(func_id)  allow this function to run recursively
+example:
+#define rapply_id() rapply_impl
+#define rapply_impl00(func,a,args...)
+#define rapply_impl10(func,a,args...) func(a)
+#define rapply_impl01(func,a,args...) defereval(rapply_id)(func,args)
+#define rapply_impl11(func,a,args...) func(a),defereval(rapply_id)(func,args)
+#define rapply_impl(func,args...) merge(merge(rapply_impl,isarg(args)),isarg(second(args)))(func,args)
+#define rapply(func,args...) evrec(rapply_impl(func,args))
+rapply(func,1,2,3)-> func(1),func(2),func(3),..(max 10k args)
 */
 
 #include "argcount.h"
@@ -39,6 +50,13 @@ argeval(tuplefunc,atomfunc,a)  if a is a tuple tuplefunc(detuple a) else atomfun
     #define argcountq(...) argcount_qc(0,##__VA_ARGS__,2,1,0)
     #define atype __auto_type
     #define ret return
+//deferred eval for recursive functions
+#define ev10(args...) id(id(id(id(id(id(id(id(id(id(args))))))))))
+#define ev20(args...) ev10(ev10(ev10(ev10(ev10(ev10(ev10(ev10(ev10(ev10(args))))))))))
+#define ev30(args...) ev20(ev20(ev20(ev20(ev20(ev20(ev20(ev20(ev20(ev20(args))))))))))
+#define evrec(args...) ev30(ev30(ev30(ev30(ev30(ev30(ev30(ev30(ev30(ev30(args))))))))))
+#define defereval(func_id) func_id rem()()
+
 #define insertbefore(arg,args...) arg,args
 #define insertafter(arg,args...) args,arg
 
@@ -62,6 +80,7 @@ argeval(tuplefunc,atomfunc,a)  if a is a tuple tuplefunc(detuple a) else atomfun
 #define skipf0(func,args...) 
 #define skipf1(func,args...) func(args)
 #define skipf(func,args...) merge(skipf,isarg(args))(func,args)
+
 
 #define stringify1(args...) #args
 #define stringify(args...) stringify1(args) 
@@ -89,4 +108,6 @@ argeval(tuplefunc,atomfunc,a)  if a is a tuple tuplefunc(detuple a) else atomfun
 #define argevalx2(func,args...) argevalx(func,args)
 #define argeval1(tuplefunc,atomfunc,arg)  argevalx2(tuplefunc,detuple(arg)) 
 #define argeval(tuplefunc,atomfunc,arg) merge(argeval,istuple(arg))(tuplefunc,atomfunc,arg)
+
+
 
