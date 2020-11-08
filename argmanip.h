@@ -56,7 +56,7 @@ insertrnth(n,arg,args...) nsert arg at Nth place in arglist from end
 evtupleap(a) evtuplewith(applyall,a) applyall(a...) or a
  evtuplef(a) evtuplewith(setapply,a) setapply(a...) or a
 */
-
+#define reverse(args...) dapply(swapargs,id,args)
 #define applyall(func,args...) chainapply(func,args)
 #define mergeall(args...) dapply(merge,id,args)
 #define toatom(args...) dapply(remcomma,id,args)
