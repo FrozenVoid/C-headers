@@ -29,6 +29,7 @@ skipf(func,args...) apply func(args) if args exist
  insertbefore(arg,args...)  ->arg,args...
 insertafter(arg,args...) ->args...,arg
 istuple(a)   1 if argument is tuple(x,y,...) or 0 if not,(1)/((b)) 1-arg tuples treated as arguments.
+argeval(tuplefunc,atomfunc,a)  if a is a tuple tuplefunc(detuple a) else atomfunc(a),if a isn't argument return nothing
 */
 
 #include "argcount.h"
@@ -60,7 +61,7 @@ istuple(a)   1 if argument is tuple(x,y,...) or 0 if not,(1)/((b)) 1-arg tuples 
 #define skiparg(x,args...) merge(skiparg,isarg(x))(x,args)
 #define skipf0(func,args...) 
 #define skipf1(func,args...) func(args)
-#define skipf(func,args...) merge(skiparg,isarg(args))(func,args)
+#define skipf(func,args...) merge(skipf,isarg(args))(func,args)
 
 #define stringify1(args...) #args
 #define stringify(args...) stringify1(args) 
@@ -81,4 +82,11 @@ istuple(a)   1 if argument is tuple(x,y,...) or 0 if not,(1)/((b)) 1-arg tuples 
 #define optnext0(default,args...) default
 #define optnext1(default,args...) args
 #define optnext(default,optional...) merge(optnext,isarg(optional))(default,optional)
+
+
+#define argeval0(tuplefunc,atomfunc,arg) skipf(atomfunc,arg)
+#define argevalx(func,args...) func(args)
+#define argevalx2(func,args...) argevalx(func,args)
+#define argeval1(tuplefunc,atomfunc,arg)  argevalx2(tuplefunc,detuple(arg)) 
+#define argeval(tuplefunc,atomfunc,arg) merge(argeval,istuple(arg))(tuplefunc,atomfunc,arg)
 
