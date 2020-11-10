@@ -46,8 +46,8 @@ arbsprint(str,arby) print large integer arb to string(str)
 #define pformat(x) _Generic((x),\
  char:   "%c",\
  char*:  "%s",\
-long long unsigned int: "%" PRIu64,\
-long long int: "%" PRIi64,\
+long long unsigned int: "%llu" ,\
+long long int: "%lli" ,\
 uint64_t: "%" PRIu64,\
  int64_t: "%" PRIi64,\
 uint32_t: "%" PRIu32,\
@@ -64,8 +64,8 @@ default:"%p" )
 #define hexformat(x) _Generic((x),\
  char:   "%c",\
  char*:  "%s",\
-long long unsigned int: "%" PRIx64,\
-long long int: "%" PRIx64,\
+long long unsigned int: "%llx" ,\
+long long int: "%llx" ,\
 uint64_t: "%" PRIx64,\
  int64_t: "%" PRIx64,\
 uint32_t: "%" PRIx32,\
@@ -82,8 +82,8 @@ default:"%p" )
 #define scanformat(x) _Generic((x),\
  char:   "%c",\
  char*:  "%s",\
-long long unsigned int: "%" SCNu64,\
-long long int: "%" SCNi64,\
+long long unsigned int: "%llu" ,\
+long long int: "%lli" ,\
 uint64_t: "%" SCNu64,\
  int64_t: "%" SCNi64,\
 uint32_t: "%" SCNu32,\
@@ -100,8 +100,8 @@ default:"%p")
 #define hexscanformat(x) _Generic((x),\
  char:   "%c",\
  char*:  "%s",\
-long long unsigned int: "%" SCNx64,\
-long long int: "%" SCNx64,\
+long long unsigned int: "%llx" ,\
+long long int: "%llx" ,\
 uint64_t: "%" SCNx64,\
  int64_t: "%" SCNx64,\
 uint32_t: "%" SCNx32,\
@@ -222,4 +222,5 @@ fprintf(file,delim),fprintf(file,format_type(arg),arg)
 #define hexfscan(file,args...) chainapply(hexfscan1,appendall((file),args))
 #define dbgprint(args...) fprint(stderr,args)
 #define dbghexprint(args...) hexfprint(stderr,args)
+
 
