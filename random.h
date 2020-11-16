@@ -35,7 +35,7 @@ rrange(start,end) integer in specific range(use randuint64()&n for powers of 2 w
 res=(res<<shift)|(res>>((sizeof(res)*8) -shift));res;})
 
 
-   static uint64_t randuint_seed[4]={123456789,123456789,123456789,123456789};
+   static uint64_t randuint_seed [4] __attribute__((unused)) ={123456789,123456789,123456789,123456789};
 
 #define randuint(s) ({  ;\
 const uint64_t result = ROTL(s[1] * 5, 7) * 9;\
