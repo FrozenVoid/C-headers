@@ -21,6 +21,10 @@ range(reccomended)::
 frange (start,end) float in specific range,if argument is floating point
 rrange(start,end) integer in specific range(use randuint64()&n for powers of 2 which will be faster than modulus due opcode latency)
 
+randomize(y) randomize an integer variable(no-seed func)
+
+
+
 
 */
 
@@ -38,6 +42,10 @@ res=(res<<shift)|(res>>((sizeof(res)*8) -shift));res;})
 
    static uint64_t randuint_seed [4] __attribute__((unused)) ={123456789,123456789,123456789,123456789};
 
+//state-free/constant-free randomization for an integer;
+#define randomize(y) ({uint64_t x=(uint64_t)y;\
+x+=~x>>11;x-=~x<<9;x+=~x<<7;\
+x+=~x>>10;x-=~x<<8;x+=~x<<6;y=(typeof (y))x;})
 
 
 //slower that xoshiro, but more random
