@@ -11,6 +11,6 @@ tapply - apply to fixed tuple and each argument(func(tup,argN),...)
 chainapply - apply func to each argument
 print.h - variadic print/scan macros
 arguments.h - argcount and other argument macros
-random.h - xoroshiro-based random functions
+random.h -  random number functions
 lambda.h - create a temporary function from arguments and return it.
 ```
