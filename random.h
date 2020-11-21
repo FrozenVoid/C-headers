@@ -25,8 +25,9 @@ rrange(start,end) integer in specific range(use randuint64()&n for powers of 2 w
 */
 
 
-/*xoroshiro random generator from http://prng.di.unimi.it/xoshiro256starstar.c */
 
+//change to your preferred generator:
+#define randuint64() randuint(randuint_seed)
 #define rnd() randuint(randuint_seed)
 
 
@@ -37,16 +38,22 @@ res=(res<<shift)|(res>>((sizeof(res)*8) -shift));res;})
 
    static uint64_t randuint_seed [4] __attribute__((unused)) ={123456789,123456789,123456789,123456789};
 
+
+
+//slower that xoshiro, but more random
 #define randuint(s) ({  ;\
-const uint64_t result = ROTL(s[1] * 5, 7) * 9;\
-	const uint64_t t = s[1] << 17;\
-	s[2] ^= s[0];s[3] ^= s[1];s[1] ^= s[2];s[0] ^= s[3];s[2] ^= t;\
-s[3] = ROTL(s[3], 45);result;     })
+const uint64_t result = ROTL(s[1]+0xff04ff03ff02ff01ULL, 7)^(~s[2]);\
+	const uint64_t t = ~(s[1]+0xf1f2f3f4f5f6f7f8ULL) ;\
+	s[2] ^= s[0]-t;s[3] ^=~s[1]+s[2];\
+	s[1] ^= ~s[2]+s[3];s[0] ^= ~s[3]-s[1];s[2] ^= ~t+s[0];\
+s[3] = ROTL(~s[3], 45)+s[2];result;     })
+
+
 
 #define setrseed(a,b,c,d) ({randuint_seed[0]=a;randuint_seed[1]=b;randuint_seed[2]=c;\
 randuint_seed[3]=d;})
 
-#define randuint64() randuint(randuint_seed)
+
 
 
 typedef union rndintconv64{
