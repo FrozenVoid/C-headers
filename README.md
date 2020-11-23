@@ -2,7 +2,7 @@
 Various C headers with utility macros/functions
 
 ------------
-Compiler assumed to be GCC 7 or newer
+Requires GCC extensions
 ```
 #include "directory_name/void.h" //to include all headers.
 argmanip - key functions 
