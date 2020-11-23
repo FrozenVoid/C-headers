@@ -1,5 +1,5 @@
 # C-headers
-Various C headers with utility macros/functions
+Various C headers with low-overhead utility macros/functions
 
 ------------
 Requires GCC extensions
