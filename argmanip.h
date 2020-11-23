@@ -44,11 +44,7 @@ removenth(args...) remove Nth argument from list's end
 insertrnth(n,arg,args...) nsert arg at Nth place in arglist from end
 //evaluate a if a is a tuple, by using first argument as function
 //if the a is not a turple the argument is returned as is
-#define evtuplewith0(func,a...) a
-#define evtuplewithx(func,args...) func(args)
-#define evtuplewithx2(func,args...) evtuplewithx(func,remlast(args))
-#define evtuplewith1(func,a)  evtuplewithx2(func,detuple(a),0) 
-#define evtuplewith(func,a) merge(evtuplewith,istuple(a))(func,a)
+evtuplewith(func,a) merge(evtuplewith,istuple(a))(func,a)
 //if the argument isn't a tuple(a,b,c...) (2+ arg tuple) the argument is unchanged
  evtuplerec(a) evtuplewith(rec2apply,a) -> rec2apply(a...) or a
  evtupleda(a) evtuplewith(dapply,a)  opapply(a...) or a
