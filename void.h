@@ -19,6 +19,12 @@
 #include <tgmath.h>
 #include <time.h>
 #include <unistd.h>
+
+#ifdef __SIZEOF_INT128__
+typedef  unsigned __int128 uint128_t;
+typedef  __int128 int128_t;
+#endif
+
 #include "array.h"
 #include "argcount.h"
 #include "argmanip.h"
@@ -27,9 +33,10 @@
 #include "chainapply.h"
 #include "cor.h"
 #include "dapply.h"
+#include "fileio.h"
 #include "enumclass.h"
 
-#include "lambda.h" 
+#include "lambda.h"
 #include "mathmacros.h"
 #include "print.h"
 #include "random.h"
@@ -38,3 +45,4 @@
 #include "size.h"
 #include "tapply.h"
 #include "timing.h"
+
