@@ -39,7 +39,7 @@ listslice(start,length,args...) return slice of arglist from StartNth  with leng
 rlistslice(end,length,args...) return slice of arglist from Nth to Nth-Length argument from end with Length arguments 
 remlast(args...) remove last argument from list
 removenth(args...) remove Nth argument from list
-removenth(args...) remove Nth argument from list's end
+removernth(args...) remove Nth argument from list's end
  insertnth(n,arg,args...) insert arg at Nth place in arglist
 insertrnth(n,arg,args...) nsert arg at Nth place in arglist from end
 //evaluate a if a is a tuple, by using first argument as function
@@ -47,7 +47,7 @@ insertrnth(n,arg,args...) nsert arg at Nth place in arglist from end
 evtuplewith(func,a) merge(evtuplewith,istuple(a))(func,a)
 //if the argument isn't a tuple(a,b,c...) (2+ arg tuple) the argument is unchanged
  evtuplerec(a) evtuplewith(rec2apply,a) -> rec2apply(a...) or a
- evtupleda(a) evtuplewith(dapply,a)  opapply(a...) or a
+ evtupleda(a) evtuplewith(dapply,a)  dapply(a...) or a
  evtupleop(a) evtuplewith(opapply,a)  opapply(a...) or a
 evtupleap(a) evtuplewith(applyall,a) applyall(a...) or a
  evtuplef(a) evtuplewith(setapply,a) setapply(a...) or a
