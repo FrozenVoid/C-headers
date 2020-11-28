@@ -2,10 +2,10 @@
 /*   
 cbegin()  - start coroutine block(assumed to be inside function)
 cret([arg]) - return a (optional) value, set to continue after this return
-cend([arg])  - end block with final return with optinal arg.
+cend([arg])  - end block with final return with optional arg.
 creset([arg]) -  reset the switch, returning optional args(as cret),
 cbreak() - break out of switch and reset switch value.
-cwait(cond,[args]) - return if condition not met,with optinal args.(saves location to switch value)
+cwait(cond,[args]) - return if condition not met,with optional args.(saves location to switch value)
 cset(val) - set switch_line to specific value(e.g. cset(0) or cset(__LINE__)
 
 cbegin {
@@ -30,6 +30,7 @@ while(0)
 #define cbreak() ;c_switch_l = 0;break;
 #define cset(v) ;c_switch_l = v;
 #define cend(args...) ;} return args;
+
 
 
 
