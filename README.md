@@ -1,6 +1,5 @@
 # C-headers
 Various C headers with low-overhead utility macros/functions
-Rules for contributors: https://github.com/FrozenVoid/RULES.txt
 
 ------------
 Requires GCC extensions
