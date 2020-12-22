@@ -49,7 +49,7 @@ typedef long double f80;
 #include "dapply.h"
 #include "fileio.h"
 #include "enumclass.h"
-
+#include "lookup.h"
 #include "lambda.h"
 #include "mathmacros.h"
 #include "print.h"
