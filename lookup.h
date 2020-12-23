@@ -18,4 +18,4 @@ gen_lookup_div(divide_double,double,1024) //more than 1023 is not supported(rang
 */
 
 #define gen_lookup_div1(v) 1.0/v
-#define gen_lookup_div(name,type,maxdiv)  const type name[maxdiv+1]={frontslice(maxdiv,1,chainapply((type)gen_lookup_div1,num1_1023))};
+#define gen_lookup_div(name,type,maxdiv)  const type name[maxdiv]={frontslice(maxdiv,1,chainapply((type)gen_lookup_div1,num1_1023))};
