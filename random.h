@@ -1,8 +1,9 @@
 #pragma once
 
 #include <stdint.h>
+#include <x86intrin.h>
 /*
-rndseed(s) use specific seed 
+rndseed(s) use specific seed
 rnd() use default seed to generate random number
 setrseed(a,b,c,d) set the generator seed vals[4]
 raw numbers::
@@ -14,7 +15,9 @@ randuint32() integer from 0 to UINT32_MAX
 randuint16() integer from 0 to UINT16_MAX
 randuint8() integer from 0 to UINT8_MAX
 
-randfloat() random float in range 0.0-1.0
+randfloat() random float in range 0.0-1.0(from generator,
+seed is static)
+rdouble() random double in range 0.0-1.0 using __rdtsc() as seed.(for unpredictable first number)
 
 range(reccomended)::
 
@@ -70,12 +73,12 @@ uint32_t a32;
 uint16_t a16;
 uint8_t a8;
 } rndintconv64;
-#ifdef __SIZEOF_INT128__ 
+#ifdef __SIZEOF_INT128__
 #define randuint128() ({\
 union {unsigned __int128 a;uint64_t b[2];} d;\
 d.b[0]=randuint64();d.b[1]=randuint64();d.a;})
 
-#endif 
+#endif
 
 #define randuint32() ({rndintconv64 a;a.a64=randuint64();  a.a32;})
 #define randuint16()  ({rndintconv64 a;a.a64=randuint64(); a.a16;})
@@ -88,6 +91,7 @@ d.b[0]=randuint64();d.b[1]=randuint64();d.a;})
 #define uintdouble01(x) ({     const union { uint64_t i; double d; } u = { .i = UINT64_C(0x3FF) << 52 | x >> 12 }; u.d-1.0;  })
 
 #define randfloat() uintdouble01(randuint64())
+#define rdouble() ({ uint64_t q1=__rdtsc(); double res=    uintdouble01(randomize(q1));res;})
 #define frange(start,end) ({typeof(end) start1=start,end1=end;\
  ((uintdouble01(randuint64())*(end1-start1))+start1);})
 
