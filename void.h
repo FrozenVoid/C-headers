@@ -43,6 +43,7 @@ typedef long double f80;
 #include "argcount.h"
 #include "argmanip.h"
 #include "arguments.h"
+#include "blankapply.h"
 #include "boolean-tokens.h"
 #include "chainapply.h"
 #include "cor.h"
@@ -59,4 +60,3 @@ typedef long double f80;
 #include "size.h"
 #include "tapply.h"
 #include "timing.h"
-
