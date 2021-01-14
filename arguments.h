@@ -12,7 +12,7 @@ stringify(args...) turn arguments into a string(1,2,3)->"1,2,3"
 merge(a,b) merges two tokens(a,b)-> ab
 tuple(args...) add parens(convert arglist to tuple) 1,2,3 -> (1,2,3)
 detuple(args)  remove parens(convert tuple to arglist) (1,2,3)-> 1,2,3
-setapply(func,args) -> func(args) 
+setapply(func,args) -> func(args)
 remcomma(a,b) remove comma (a,b) -> a b
 onearg(args...) is there exactly one argument(non-empty)
 mergetuples(a,b) ((1,2,3),(4,5,6)) -> (1,2,3,4,5,6)
@@ -47,8 +47,8 @@ rapply(func,1,2,3)-> func(1),func(2),func(3),..(max 10k args)
 
 #include "argcount.h"
     #define argcount_q1(_0,_1,_2,N,...) N
-    #define argcount_qc(args...) argcount_q1(args) 
-    //  args push>>> n. 3,2,1 :: :args:<numbers> 
+    #define argcount_qc(args...) argcount_q1(args)
+    //  args push>>> n. 3,2,1 :: :args:<numbers>
     #define argcountq(...) argcount_qc(0,##__VA_ARGS__,2,1,0)
     #define atype __auto_type
     #define ret return
@@ -77,32 +77,32 @@ rapply(func,1,2,3)-> func(1),func(2),func(3),..(max 10k args)
 #define merge(a,b) merge1(a,b)
 #define id(args...) args
 #define negate(args...) (!(args))
-#define rem(args...) 
+#define rem(args...)
 #define swapargs(a,args...) args,a
 #define tuple(args...) (args)
 #define detuple(arg) id arg
 #define rest(a,args...) args
 #define first1(a,args...) a
-#define first(a,args...) first1(a...)
+#define first(a,args...) first1(a)
 #define second(args...) first(rest(args))
-#define isarg1(args...) argcountq(args) 
+#define isarg1(args...) argcountq(args)
 #define isarg(args...) isarg1(first(args))
 #define istuple(a) isarg(second(id a))
 #define skiparg0(x,args...) args
 #define skiparg1(x,args...) x,args
 #define skiparg(x,args...) merge(skiparg,isarg(x))(x,args)
-#define skipf0(func,args...) 
+#define skipf0(func,args...)
 #define skipf1(func,args...) func(args)
 #define skipf(func,args...) merge(skipf,isarg(args))(func,args)
 
 
 #define stringify1(args...) #args
-#define stringify(args...) stringify1(args) 
+#define stringify(args...) stringify1(args)
 #define setapply(func,args...) func(args)
 #define remcomma(a,b) a b
 #define remcomma2(a,b...) a b
 #define onearg00 0
-#define onearg10 1 
+#define onearg10 1
 #define onearg11 0
 #define onearg01 0
 #define onearg(args...) merge(onearg,merge(isarg(first(args)),isarg(first(rest(args)))))
@@ -120,7 +120,7 @@ rapply(func,1,2,3)-> func(1),func(2),func(3),..(max 10k args)
 #define argeval0(tuplefunc,atomfunc,arg) skipf(atomfunc,arg)
 #define argevalx(func,args...) func(args)
 #define argevalx2(func,args...) argevalx(func,args)
-#define argeval1(tuplefunc,atomfunc,arg)  argevalx2(tuplefunc,detuple(arg)) 
+#define argeval1(tuplefunc,atomfunc,arg)  argevalx2(tuplefunc,detuple(arg))
 #define argeval(tuplefunc,atomfunc,arg) merge(argeval,istuple(arg))(tuplefunc,atomfunc,arg)
 
 
