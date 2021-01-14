@@ -111,7 +111,7 @@ evtupleap(a) evtuplewith(applyall,a) applyall(a...) or a
 #define condelse(default,tuples...) ({rec2apply(cond1,tuples,default);})
 #define condif1(tup) else if((first(detuple(tup)))){rest  tup;}
 #define condif(tuples...)  ({if(0){;} blankapply(condif1,tuples) ;0;})
-#define condifelse(default,tuples...)  ({if(0){;} blankapply(condif1,tuples) else {default;};})
+#define condifelse(default,tuples...)  ({if(0){;} blankapply(condif1,tuples) else {default;};0;})
 #define appendall1(tup,arg) mergetuples(tup,(arg))
 #define prefixall1(tup,arg) mergetuples((arg),tup)
 
