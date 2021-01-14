@@ -3,6 +3,7 @@
 #include "tapply.h"
 #include "chainapply.h"
 #include "recapply.h"
+#include "blankapply.h"
 /* argmanip.h
 reverse(args) reverse argument order(1,2,3)-> 3,2,1
 applyall(func,args) apply func to each argument-> func(arg1),func(arg2),...
@@ -27,6 +28,9 @@ dtset((name,val)) same as above with tuple format
 setall((name,val),(name2,val2),...) set tuple vars to values.
 cond((cond1,result),(cond2,result),...) return first tuple with condition evaluation to true or 0 if none match.
 condelse(default,(cond1,result),(cond2,result),...) return first tuple with condition evaluation to true or 'default' if none match.
+ condif(tuples...) cond with if(){}else if() instead of ternary
+ condifelse(default,tuples...)  same as above with
+ default condition( else if chaining)
 orall(args...) apply short-circuit OR || which returns 1 if any condition is true,0 otherwise
 andall(args...) apply short-circuit AND&& which returns 1 if all conditions are true,0 otherwise
 andlast(args...) return last argument if all arguments are true, 0 otherwise.
@@ -35,8 +39,8 @@ ntharg(n,args...) return nth argument of arglist
 rntharg(n,args...) return nth argument from end of arglist
 restslice(n,args...) return arguments after Nth argument(including Nth)
 frontslice(n,args...) return first N arguments
-listslice(start,length,args...) return slice of arglist from StartNth  with length arguments 
-rlistslice(end,length,args...) return slice of arglist from Nth to Nth-Length argument from end with Length arguments 
+listslice(start,length,args...) return slice of arglist from StartNth  with length arguments
+rlistslice(end,length,args...) return slice of arglist from Nth to Nth-Length argument from end with Length arguments
 remlast(args...) remove last argument from list
 removenth(args...) remove Nth argument from list
 removernth(args...) remove Nth argument from list's end
@@ -82,7 +86,7 @@ evtupleap(a) evtuplewith(applyall,a) applyall(a...) or a
 #define evtuplewith0(func,a...) a
 #define evtuplewithx(func,args...) func(args)
 #define evtuplewithx2(func,args...) evtuplewithx(func,remlast(args))
-#define evtuplewith1(func,a)  evtuplewithx2(func,detuple(a),0) 
+#define evtuplewith1(func,a)  evtuplewithx2(func,detuple(a),0)
 #define evtuplewith(func,a) merge(evtuplewith,istuple(a))(func,a)
 
 #define evtuplerec(a) evtuplewith(rec2apply,a)
@@ -94,7 +98,7 @@ evtupleap(a) evtuplewith(applyall,a) applyall(a...) or a
 #define set(name,val) typeof(val) name = val
 #define dtset(tup) typeof(second tup) first tup = second tup;
 #define setall(tup_args...) toatom(applyall(dtset,tup_args))
-#define genargs(n,arg) merge(chainapply,n)(arg id,) 
+#define genargs(n,arg) merge(chainapply,n)(arg id,)
 
 
 
@@ -105,6 +109,9 @@ evtupleap(a) evtuplewith(applyall,a) applyall(a...) or a
 #define cond1(tup,arg) ternary((first tup),second tup,arg)
 #define cond(tuples...) ({rec2apply(cond1,tuples,0);})
 #define condelse(default,tuples...) ({rec2apply(cond1,tuples,default);})
+#define condif1(tup) else if((first(detuple(tup)))){rest  tup;}
+#define condif(tuples...)  ({if(0){;} blankapply(condif1,tuples) ;0;})
+#define condifelse(default,tuples...)  ({if(0){;} blankapply(condif1,tuples) else {default;};})
 #define appendall1(tup,arg) mergetuples(tup,(arg))
 #define prefixall1(tup,arg) mergetuples((arg),tup)
 
@@ -122,5 +129,5 @@ evtupleap(a) evtuplewith(applyall,a) applyall(a...) or a
 #define andall(args...) ({opapply(&&,args);})
 #define orall(args...) ({opapply(||,args);})
 #define orfirst(args...) ({rec2apply(iftrue,args,0);})
-#define andlast(args...) ({andall(args)?last(args):0;}) //(1,2,3)->(1)&&(3) 
+#define andlast(args...) ({andall(args)?last(args):0;}) //(1,2,3)->(1)&&(3)
 
