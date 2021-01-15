@@ -60,7 +60,7 @@ evtupleap(a) evtuplewith(applyall,a) applyall(a...) or a
 #define reverse(args...) dapply(swapargs,id,args)
 #define applyall(func,args...) chainapply(func,args)
 #define mergeall(args...) dapply(merge,id,args)
-#define toatom(args...) dapply(remcomma,id,args)
+#define toatom(args...) blankapply(id,args)
 #define rec2apply(func,args...) dapply(func,id,args)
 #define rect2apply(func,tuples...) dapply(func,detuple,tuples)
 #define rec2applyt(func,tup,args...) dapply(func tup,id,args)
@@ -124,7 +124,7 @@ evtupleap(a) evtuplewith(applyall,a) applyall(a...) or a
 
 
 
-#define opapply(op,arg1,args...) arg1 dapply(remcomma,op id,args)
+#define opapply(op,arg1,args...) arg1 blankapply( op id,args)
 //examples
 #define addall(args...) ({opapply(+,args);})
 #define suball(args...) ({opapply(-,args);})
