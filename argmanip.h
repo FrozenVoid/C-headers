@@ -66,7 +66,7 @@ evtupleap(a) evtuplewith(applyall,a) applyall(a...) or a
 
 
 #define firstarg(args...) first(args) //forwarding
-#define last(args...) firstarg(reverse2(args))
+#define last(args...) firstarg(reverse(args))
 
 #define forwremlast(a) reverse(rest(a))
 #define remlast(args...) forwremlast(reverse(args))
