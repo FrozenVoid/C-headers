@@ -31,6 +31,7 @@ condelse(default,(cond1,result),(cond2,result),...) return first tuple with cond
  condif(tuples...) cond with if(){}else if() instead of ternary
  condifelse(default,tuples...)  same as above with
  default condition( else if chaining)
+condeach(tuples...) eval second argument of each tuple, which has a condition that matches.
 orall(args...) apply short-circuit OR || which returns 1 if any condition is true,0 otherwise
 andall(args...) apply short-circuit AND&& which returns 1 if all conditions are true,0 otherwise
 andlast(args...) return last argument if all arguments are true, 0 otherwise.
@@ -112,6 +113,9 @@ evtupleap(a) evtuplewith(applyall,a) applyall(a...) or a
 #define condif1(tup) else if((first(detuple(tup)))){rest  tup;}
 #define condif(tuples...)  ({if(0){;} blankapply(condif1,tuples) ;0;})
 #define condifelse(default,tuples...)  ({if(0){;} blankapply(condif1,tuples) else {default;};0;})
+#define condeach1(tup) if((first(detuple(tup)))){rest  tup;}
+#define condeach(tuples...)  ({blankapply(condeach1,tuples) ;0;})
+
 #define appendall1(tup,arg) mergetuples(tup,(arg))
 #define prefixall1(tup,arg) mergetuples((arg),tup)
 
