@@ -1,9 +1,9 @@
-#pragma once 
+#pragma once
 #include "arguments.h"
 /*
 rec2chainapply(func,args...)  func(arg1,func(arg2,func(arg3,arg4)))
 */
-#define rec2chainapply(func,arg...) merge(recchainapply,argcount(arg))(func,args)
+#define rec2chainapply(func,args...) merge(recchainapply,argcount(args))(func,args)
 
 #define rec2chainapply1(func,a,args...) func(a,args)
 #define rec2chainapply2(func,a,args...) func(a,rec2chainapply1(func,args))
