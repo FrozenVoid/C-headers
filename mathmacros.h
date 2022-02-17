@@ -15,7 +15,7 @@ tmin/tmax  min/max of two numbers
 derivative  - lambda of derivative(function)
 */
 //https://lemire.me/blog/2016/06/27/a-fast-alternative-to-the-modulo-reduction/
-#define modxy(x,y) ((uint32_t)((((uint64_t)x)*((uint64_t)y))>>32))
+#define modxy(x,y) ((uint32_t)((((uint64_t) ((uint32_t)x) )*((uint64_t)y))>>32))
 
 #define numberof(str) strtoll(str,NULL,10)
 #define hexnumberof(str) strtoll(str,NULL,16)
