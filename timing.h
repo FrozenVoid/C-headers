@@ -34,3 +34,6 @@ opapply(;,args);clock_gettime(CLOCK_MONOTONIC_RAW, &end);\
 
 #define timing(args...) ({uint64_t start=__rdtsc();opapply(;,args);__rdtsc()-start;})
 #define waitinput() ({char c;printf("\nPress Enter to continue:");scanf("%c",&c);c;})
+
+//from program start
+#define mstime() ((clock())/(CLOCKS_PER_SEC/1000))
