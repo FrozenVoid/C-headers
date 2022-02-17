@@ -6,3 +6,5 @@ fseek(fptr,0,SEEK_END);atype retsize=ftell(fptr);\
 fseek(fptr,curpos,SEEK_SET);retsize;})
 
 #define fextension(filename) ({ char *dot = strrchr(filename, '.');(!dot || dot == filename)?"":dot+1;})
+
+#define nooutbuffer setvbuf(stdout,NULL,_IONBF, 0);
