@@ -1,4 +1,4 @@
-#pragma once 
+#pragma once
 #include "lambda.h"
 /* mathmacros.h
 numberof(str) convert string to number
@@ -14,6 +14,9 @@ averagedamp(func) return function that returns average of x/func(x)
 tmin/tmax  min/max of two numbers
 derivative  - lambda of derivative(function)
 */
+//https://lemire.me/blog/2016/06/27/a-fast-alternative-to-the-modulo-reduction/
+#define modxy(x,y) ((uint32_t)((((uint64_t)x)*((uint64_t)y))>>32))
+
 #define numberof(str) strtoll(str,NULL,10)
 #define hexnumberof(str) strtoll(str,NULL,16)
 
@@ -41,3 +44,4 @@ diff=thisdiff;current=result;} ;current;})
 
 #define newtontransform(gfunc) lambda(double,(double x),return x-( gfunc(x)/derivative(gfunc)(x)  ))
 #define newtonmethod(gfunc,guess) fixedpoint(newtontransform(gfunc),guess)
+
