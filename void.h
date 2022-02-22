@@ -19,7 +19,7 @@
 #include <tgmath.h>
 #include <time.h>
 #include <unistd.h>
-
+#include <byteswap.h>
 #ifdef __SIZEOF_INT128__
 typedef  unsigned __int128 uint128_t;
 typedef  __int128 int128_t;
@@ -60,3 +60,4 @@ typedef long double f80;
 #include "size.h"
 #include "tapply.h"
 #include "timing.h"
+
