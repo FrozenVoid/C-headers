@@ -24,7 +24,7 @@ derivative  - lambda of derivative(function)
 #define tmax(x,y) ({typeof(x) tminx=x,tminy=y,res=tminy>tminx?tminy:tminx;      ;res;})
 #define tabs(x) ({typeof(x) res=x;res<0?-res:res;})
 
-#define u64log2(X) ((unsigned) (8*sizeof (unsigned long long) - __builtin_clzll((X)) - 1))
+#define log2index(x)  (63 - __builtin_clzll((x)))
 #define issigned(x) (((typeof(x))-1)<((typeof(x))0))
 #define isinteger(x) ((typeof(x))1.1 == 1)
 //branchless bound
