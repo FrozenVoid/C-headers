@@ -45,3 +45,5 @@ diff=thisdiff;current=result;} ;current;})
 #define newtontransform(gfunc) lambda(double,(double x),return x-( gfunc(x)/derivative(gfunc)(x)  ))
 #define newtonmethod(gfunc,guess) fixedpoint(newtontransform(gfunc),guess)
 
+#define intmin(x,y) (y ^ ((x ^ y) & -(x < y)))
+#define intmax(x,y) (x ^ ((x ^ y) & -(x < y)))
