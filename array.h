@@ -3,6 +3,7 @@
 #include "random.h"
 /*
 combsort(A,length) sort array with combsort
+usort(A,length) fast unsigned integer radix sort
 reduce(func,arr,len)  return accumulated value from func(accum,arr[i])
 formap(func,arr,len) set len elements to func(arr[i])
 foreach(func,arr,len) execute func(arr[i]) for len elements
@@ -17,6 +18,21 @@ uniquesetrand(arr,len,rangemin,rangemax) set array elements to unique values in 
     const typeof(A[0]) tmp=A[i];\
     const int cnd=tmp>A[j];\
     A[i]=cnd?A[j]:tmp;A[j]=cnd?tmp:A[j];};}while (gap);})
+
+    #define radix3(byte,siz,A,TEMP)  ({ ;\
+     i64 count[256]={0};int sh=byte*8;\
+    for(i64 i=0;i<siz;i++){ ;\
+    count[((A[i]>>sh)&255)]++;};\
+    for(i64 i=1;i<256;i++)count[i] +=count[i-1];\
+    for(i64 i=siz-1;i>-1;i--){;TEMP[(--count[((A[i] >> (sh))&0xff)])] = A[i];} ;;})
+
+//for bytes use counting sort
+    #define usort(arr,elems) ({\
+    typeof(arr[0]) tarr[elems];\
+    for(int i=0;i<sizeof(arr[0]);i++){\
+    if(i&1){radix3(i, elems,tarr,arr); }else{\
+    radix3(i, elems,arr,tarr);}}; ;})
+
 
 #define reduce(func,arr,len) ({ typeof(arr[0]) accum=arr[0];\
 for(size_t i=1;i<len;i++)accum=func(accum,arr[i]); accum;})
