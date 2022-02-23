@@ -28,10 +28,10 @@ uniquesetrand(arr,len,rangemin,rangemax) set array elements to unique values in 
 
 //for bytes use counting sort
     #define usort(arr,elems) ({\
-    typeof(arr[0]) tarr[elems];\
+    typeof(arr[0])* tarr=malloc(sizeof(arr[0])*elems);\
     for(int i=0;i<sizeof(arr[0]);i++){\
     if(i&1){radix3(i, elems,tarr,arr); }else{\
-    radix3(i, elems,arr,tarr);}}; ;})
+    radix3(i, elems,arr,tarr);}};free(tarr) ;})
 
 
 #define reduce(func,arr,len) ({ typeof(arr[0]) accum=arr[0];\
