@@ -2,6 +2,9 @@
 
 #include <stdint.h>
 #include <x86intrin.h>
+#ifndef modxy
+#define modxy(x,y) ((uint32_t)((((uint64_t) ((uint32_t)x) )*((uint64_t)y))>>32))
+#endif
 /*
 rndseed(s) use specific seed
 rnd() use default seed to generate random number
