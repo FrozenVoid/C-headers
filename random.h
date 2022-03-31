@@ -90,7 +90,7 @@ d.b[0]=randuint64();d.b[1]=randuint64();d.a;})
 
 #define rrange(start,end) ({typeof(end) start1=end-start;\
 uint64_t r=randuint64();\
-modxy(r,start1);;})
+((modxy(r,start1))+start);;})
 
 #define uintdouble01(x) ({     const union { uint64_t i; double d; } u = { .i = UINT64_C(0x3FF) << 52 | x >> 12 }; u.d-1.0;  })
 
