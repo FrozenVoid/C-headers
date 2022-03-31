@@ -88,8 +88,9 @@ d.b[0]=randuint64();d.b[1]=randuint64();d.a;})
 #define randuint8() ({rndintconv64 a;a.a64=randuint64();  a.a8;})
 #define rndbyte() ({   (uint8_t)((randuint64()>>((randuint64()>>31)&31))&0xff);  })
 
-#define rrange(start,end) ({typeof(end) start1=start,end1=end;\
- ((randuint64()%(end1-start1))+start1);})
+#define rrange(start,end) ({typeof(end) start1=end-start;\
+uint64_t r=randuint64();\
+modxy(r,start1);;})
 
 #define uintdouble01(x) ({     const union { uint64_t i; double d; } u = { .i = UINT64_C(0x3FF) << 52 | x >> 12 }; u.d-1.0;  })
 
